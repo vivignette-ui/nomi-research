@@ -783,15 +783,24 @@ async function generateB() {
   }
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function buildDrafts(containerId, data, version) {
   var html = '';
   data.forEach(function(d, i) {
-    html += '<div class="draft-card" tabindex="0" onclick="selDraft(this,'' + version + '',' + i + ')" onkeydown="kbDraft(event,this,'' + version + '',' + i + ')">';
+    html += '<div class="draft-card" tabindex="0" onclick="selDraft(this, \'' + version + '\', ' + i + ')" onkeydown="kbDraft(event, this, \'' + version + '\', ' + i + ')">';
     html += '<div class="draft-radio"></div>';
     html += '<div class="draft-img">' + imgIcon + '</div>';
-    html += '<div class="draft-title">' + escapeHtml(d.title || ('Draft ' + (i + 1))) + '</div>';
+    html += '<div class="draft-title">' + escapeHtml(d.title || '') + '</div>';
     html += '<div class="draft-body">' + escapeHtml(d.body || '') + '</div>';
-    html += '<span class="draft-tone">' + escapeHtml(d.tone || 'Generated') + '</span>';
+    html += '<span class="draft-tone">' + escapeHtml(d.tone || '') + '</span>';
     html += '</div>';
   });
   document.getElementById(containerId).innerHTML = html;
