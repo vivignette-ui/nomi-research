@@ -5,215 +5,300 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nomi — Research Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#ffffff;
-  --bg2:#f7f7f8;
-  --bg3:#f0f0f2;
-  --surface:#ffffff;
-  --border:#d4d4da;
-  --border2:#b0b0bc;
-  --border3:#8a8a9a;
-  --text1:#0f0f14;
-  --text2:#3a3a4a;
-  --text3:#6a6a7e;
-  --text4:#9a9aae;
-  --accent:#2563eb;
-  --accent-hover:#1d4ed8;
-  --accent-light:#eff4ff;
-  --accent-border:#93b4f8;
-  --placeholder-bg:#dbeafe;
-  --placeholder-border:#93c5fd;
-  --green:#16a34a;
-  --green-light:#f0fdf4;
-  --green-border:#86efac;
-  --r4:4px;--r8:8px;--r12:12px;--r16:16px;--rpill:100px;
-  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);
-  --shadow-md:0 4px 12px rgba(0,0,0,.10),0 2px 4px rgba(0,0,0,.06);
-  --ease:cubic-bezier(.4,0,.2,1);
+  --bg:#0e0e10;
+  --bg2:#17171b;
+  --bg3:#1f1f25;
+  --bg4:#272730;
+  --bg5:#30303c;
+  --surface:#1d1d23;
+  --accent:#526C90;
+  --accent2:#7a9cbd;
+  --accent-soft:rgba(82,108,144,0.16);
+  --accent-soft2:rgba(82,108,144,0.08);
+  --accent-border:rgba(122,156,189,0.28);
+  --green:#5caa88;
+  --green-soft:rgba(92,170,136,0.12);
+  --green-border:rgba(92,170,136,0.30);
+  --t1:#eeeef2;
+  --t2:#b8b8c8;
+  --t3:#7e7e90;
+  --b1:rgba(255,255,255,0.07);
+  --b2:rgba(255,255,255,0.11);
+  --b3:rgba(255,255,255,0.20);
+  --r4:4px; --r8:8px; --r12:12px; --r16:16px; --r22:16px; --rpill:100px;
+  --ease:cubic-bezier(0.4,0,0.2,1);
+  --trans:0.18s cubic-bezier(0.4,0,0.2,1);
 }
-html,body{min-height:100%;background:#f4f4f6;font-family:'Inter',sans-serif;color:var(--text1);-webkit-font-smoothing:antialiased}
-.app{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
-.topbar{width:100%;max-width:760px;display:flex;align-items:center;justify-content:space-between;padding:20px 0 0}
-.logo{font-size:15px;font-weight:600;letter-spacing:-.03em;color:var(--text1)}
-.proto-badge{font-size:11px;font-weight:500;color:var(--text4);background:var(--bg3);border:1px solid var(--border);border-radius:var(--rpill);padding:4px 10px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r16);padding:36px 40px;width:100%;max-width:760px;margin-top:24px;box-shadow:var(--shadow)}
-.progress-wrap{width:100%;max-width:760px;margin-top:28px;display:flex;align-items:center;gap:8px}
-.prog-step{flex:1;height:3px;border-radius:100px;background:var(--bg3);transition:background .3s var(--ease)}
-.prog-step.done{background:var(--accent)}
-.prog-step.active{background:var(--accent)}
+html,body{
+  min-height:100%;
+  background:radial-gradient(ellipse at 30% 20%, #141c2a 0%, #0a0a0e 60%);
+  font-family:'Inter',-apple-system,sans-serif;
+  color:var(--t1);
+  -webkit-font-smoothing:antialiased;
+  font-size:14px;
+}
+.app{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 96px}
+.topbar{width:100%;max-width:720px;display:flex;align-items:center;justify-content:space-between;padding:22px 0 0}
+.logo{font-size:15px;font-weight:600;letter-spacing:-0.03em;color:var(--t1)}
+.prog-wrap{width:100%;max-width:720px;margin-top:24px;display:flex;gap:6px}
+.prog-seg{flex:1;height:2px;border-radius:100px;background:var(--b1);transition:background 0.3s var(--ease)}
+.prog-seg.done{background:var(--accent2)}
+.prog-seg.active{background:var(--accent2)}
+.card{
+  width:100%;max-width:720px;
+  background:rgba(28,28,36,0.72);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:var(--r22);
+  padding:40px 44px;
+  margin-top:20px;
+  animation:fadeUp 0.35s ease both;
+  box-shadow:0 8px 40px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.06);
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:580px){.card{padding:28px 22px;border-radius:var(--r16)}}
 .screen{display:none}
 .screen.active{display:block}
-.overline{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text4);margin-bottom:10px}
-.display{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1.2;color:var(--text1);margin-bottom:10px}
-.h2{font-size:20px;font-weight:600;letter-spacing:-.025em;color:var(--text1);margin-bottom:6px}
-.body{font-size:14px;font-weight:400;color:var(--text2);line-height:1.65}
-.sec-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
-.div{height:1px;background:var(--border);margin:28px 0}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;border:none;border-radius:var(--r8);transition:all .18s var(--ease);outline:none;text-decoration:none}
-.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:var(--accent);color:#fff;font-size:14px;padding:11px 22px}
-.btn-primary:hover{background:var(--accent-hover)}
-.btn-back{background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:color .15s}
-.btn-back:hover{color:var(--text1)}
-.btn-back:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-.field-label{font-size:13px;font-weight:500;color:var(--text2);display:block;margin-bottom:6px}
-.field-label .opt{font-weight:400;color:var(--text4)}
-input[type=text],input[type=email],textarea{font-family:'Inter',sans-serif;font-size:14px;font-weight:400;width:100%;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r8);color:var(--text1);outline:none;transition:border-color .18s;resize:none}
-input[type=text]::placeholder,input[type=email]::placeholder,textarea::placeholder{color:var(--text4)}
-input[type=text]:focus,input[type=email]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
-.mode-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:16px 18px;cursor:pointer;transition:all .18s var(--ease);position:relative}
-.mode-card:hover{background:var(--surface);border-color:var(--border2);box-shadow:var(--shadow)}
-.mode-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.mode-card.sel{background:var(--accent-light);border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
-.mode-title{font-size:14px;font-weight:600;color:var(--text1);margin-bottom:3px}
-.mode-sub{font-size:12px;color:var(--text3)}
-.mode-check{position:absolute;top:14px;right:14px;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;transition:all .18s}
-.mode-card.sel .mode-check{background:var(--accent);border-color:var(--accent)}
-.mode-check svg{display:none}
-.mode-card.sel .mode-check svg{display:block}
-.slider-row{display:grid;grid-template-columns:72px 1fr 72px;align-items:center;gap:12px;margin-bottom:14px}
-.sl-lbl{font-size:12px;font-weight:500;color:var(--text3)}
-.sl-lbl.r{text-align:right}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:100px;background:linear-gradient(to right, var(--accent) var(--val,50%), var(--bg3) var(--val,50%));outline:none;cursor:pointer;border:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.15);cursor:pointer;transition:box-shadow .15s}
-input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 4px rgba(37,99,235,.15)}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:7px 16px;border-radius:var(--rpill);border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .18s var(--ease)}
-.chip:hover{border-color:var(--border3);color:var(--text1)}
-.chip.on{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-.draft-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:24px}
-.draft-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:20px 22px;cursor:pointer;transition:all .18s var(--ease);position:relative}
-.draft-card:hover{background:var(--surface);border-color:var(--border2);box-shadow:var(--shadow)}
-.draft-card.sel{background:var(--accent-light);border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
-.draft-img{width:100%;height:100px;background:var(--placeholder-bg);border:1px solid var(--placeholder-border);border-radius:var(--r8);margin-bottom:12px;display:flex;align-items:center;justify-content:center}
-.draft-img svg{color:var(--accent);opacity:.5}
-.draft-title{font-size:14px;font-weight:600;color:var(--text1);margin-bottom:5px}
-.draft-body{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px}
-.draft-tone{display:inline-block;font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-border);border-radius:var(--rpill);padding:3px 10px}
-.draft-radio{position:absolute;top:18px;right:18px;width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.draft-card.sel .draft-radio{border-color:var(--accent);background:var(--accent)}
-.draft-card.sel .draft-radio::after{content:'';display:block;width:8px;height:8px;border-radius:50%;background:#fff}
-.rating-row{margin-bottom:20px}
-.rating-q{font-size:13px;font-weight:500;color:var(--text1);margin-bottom:10px}
-.rating-scale{display:flex;gap:6px}
-.r-btn{width:40px;height:40px;border-radius:var(--r8);border:1.5px solid var(--border2);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;transition:all .18s var(--ease);flex-shrink:0}
-.r-btn:hover{border-color:var(--border3);color:var(--text1);background:var(--bg2)}
-.r-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.rating-labels{display:flex;justify-content:space-between;margin-top:5px;padding:0 2px}
-.r-lbl{font-size:10px;color:var(--text4)}
-.fc-row{margin-bottom:20px}
-.fc-q{font-size:14px;font-weight:500;color:var(--text1);margin-bottom:10px;line-height:1.45}
-.fc-opts{display:flex;gap:8px;flex-wrap:wrap}
-.fc-btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--r8);border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .18s var(--ease)}
-.fc-btn:hover{border-color:var(--border3);color:var(--text1);background:var(--bg2)}
-.fc-btn.chosen{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
-.compare-col{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:22px}
-.compare-col.b{background:var(--accent-light);border-color:var(--accent-border)}
-.compare-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:var(--rpill);margin-bottom:12px}
-.compare-badge.a{background:var(--bg3);color:var(--text3);border:1px solid var(--border)}
-.compare-badge.b{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border)}
-.compare-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
-.compare-text{font-size:13px;font-weight:400;color:var(--text1);line-height:1.65}
-.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
-.act-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:14px 18px;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text2);text-align:left;transition:all .18s var(--ease);display:flex;align-items:center;gap:10px}
-.act-card:hover{background:var(--surface);border-color:var(--border2);color:var(--text1);box-shadow:var(--shadow)}
-.act-card.done{background:var(--green-light);border-color:var(--green-border);color:var(--green)}
-.act-icon{width:28px;height:28px;border-radius:var(--r8);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .18s}
-.act-card.done .act-icon{background:var(--green-light);border-color:var(--green-border)}
-.nyla-box{background:var(--text1);border-radius:var(--r16);padding:36px 40px;margin-top:8px}
-.nyla-logo{font-size:22px;font-weight:600;letter-spacing:-.04em;color:#fff;margin-bottom:8px}
-.nyla-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.65;margin-bottom:24px;max-width:440px}
-.nyla-box input[type=email]{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff;margin-bottom:10px}
-.nyla-box input[type=email]::placeholder{color:rgba(255,255,255,.35)}
-.nyla-confirm{font-size:13px;color:#6ee7b7;margin-top:10px;display:none;align-items:center;gap:6px}
-textarea.open-q{min-height:80px}
-.task-pill{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rpill);padding:7px 14px;font-size:13px;color:var(--text2);margin-bottom:20px;max-width:100%}
-.task-pill svg{flex-shrink:0;color:var(--text3)}
-.task-pill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-@media(max-width:560px){
-  .card{padding:24px 20px}
-  .compare-grid{grid-template-columns:1fr}
-  .mode-grid{grid-template-columns:1fr}
-  .act-grid{grid-template-columns:1fr}
+.overline{font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.display{font-size:28px;font-weight:500;letter-spacing:-0.035em;line-height:1.18;color:var(--t1);margin-bottom:10px}
+.h2{font-size:20px;font-weight:500;letter-spacing:-0.03em;color:var(--t1);margin-bottom:6px}
+.body{font-size:14px;font-weight:300;color:var(--t2);line-height:1.65}
+.sec-label{font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+.div{height:1px;background:rgba(255,255,255,0.07);margin:28px 0}
+.req{color:var(--accent2)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  font-family:'Inter',-apple-system,sans-serif;font-weight:500;
+  cursor:pointer;border:none;border-radius:var(--rpill);
+  transition:all var(--trans);outline:none;white-space:nowrap;
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.card{animation:fadeUp .3s ease both}
+.btn:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
+.btn:active{transform:scale(0.97)}
+.btn-primary{background:var(--accent);color:#fff;font-size:14px;padding:11px 24px}
+.btn-primary:hover{background:var(--accent2)}
+.btn-back{
+  background:var(--bg3);border:1px solid var(--b2);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--rpill);transition:all var(--trans)
+}
+.btn-back:hover{border-color:var(--b3);color:var(--t1);background:var(--bg4)}
+.field-label{font-size:13px;font-weight:500;color:var(--t1);display:block;margin-bottom:7px}
+.field-label .opt{font-weight:300;color:var(--t3)}
+input[type=text],input[type=email],textarea{
+  font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:300;
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.11);
+  border-radius:var(--r8);
+  color:var(--t1);outline:none;
+  transition:border-color var(--trans),box-shadow var(--trans);
+  resize:none;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+input::placeholder,textarea::placeholder{color:var(--t3)}
+input:focus,textarea:focus{border-color:rgba(90,135,197,0.6);box-shadow:0 0 0 3px rgba(61,107,170,0.15)}
+select{
+  font-family:'Inter',-apple-system,sans-serif;font-size:14px;font-weight:300;
+  width:100%;padding:11px 14px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.11);
+  border-radius:var(--r8);
+  color:var(--t1);outline:none;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237e7e90' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
+  transition:border-color var(--trans),box-shadow var(--trans);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+select:focus{border-color:rgba(122,156,189,0.5);box-shadow:0 0 0 3px rgba(82,108,144,0.15)}
+select option{background:#1f1f25;color:var(--t1)}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.mode-grid{grid-template-columns:1fr}}
+.mode-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:var(--r12);
+  padding:16px 18px 16px 16px;
+  cursor:pointer;transition:all var(--trans);position:relative;
+  display:flex;flex-direction:column;gap:3px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.mode-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.16);transform:translateY(-2px)}
+.mode-card.sel{background:var(--accent-soft);border-color:var(--accent-border)}
+.mode-title{font-size:14px;font-weight:500;color:var(--t1)}
+.mode-sub{font-size:12px;color:var(--t3)}
+.mode-check{
+  position:absolute;top:14px;right:14px;width:18px;height:18px;border-radius:50%;
+  border:1.5px solid var(--b2);background:var(--bg4);
+  display:flex;align-items:center;justify-content:center;transition:all var(--trans)
+}
+.mode-card.sel .mode-check{background:var(--accent);border-color:var(--accent)}
+.mode-check .chk{display:none}
+.mode-card.sel .mode-check .chk{display:block}
+.slider-row{display:grid;grid-template-columns:68px 1fr 68px;align-items:center;gap:12px;margin-bottom:12px}
+.sl-lbl{font-size:12px;font-weight:500;color:var(--t2)}
+.sl-lbl.r{text-align:right}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:100px;
+  background:linear-gradient(to right,var(--accent2) var(--pct,50%),rgba(255,255,255,0.18) var(--pct,50%));
+  outline:none;cursor:pointer;border:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:19px;height:19px;border-radius:50%;
+  background:var(--bg2);border:2px solid var(--accent2);box-shadow:0 1px 4px rgba(0,0,0,0.4);cursor:pointer
+}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:500;
+  padding:5px 14px;border-radius:var(--rpill);
+  border:1px solid var(--b2);background:var(--bg3);color:var(--t2);
+  cursor:pointer;transition:all var(--trans)
+}
+.chip:hover{border-color:var(--b3);color:var(--t1);background:var(--bg4)}
+.chip.on{background:var(--accent-soft);border-color:var(--accent-border);color:var(--accent2)}
+.draft-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:24px}
+.draft-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:var(--r16);
+  padding:20px 22px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:all var(--trans);position:relative;
+}
+.draft-card:hover{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.16);transform:translateY(-2px)}
+.draft-card.sel{background:var(--accent-soft);border-color:var(--accent-border)}
+.draft-title{font-size:14px;font-weight:500;color:var(--t1);margin-bottom:5px;padding-right:28px}
+.draft-body{font-size:13px;font-weight:300;color:var(--t2);line-height:1.65;margin-bottom:12px}
+.draft-tone{
+  display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;
+  color:var(--accent2);background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:var(--rpill);padding:3px 10px;
+}
+.draft-radio{
+  position:absolute;top:18px;right:18px;width:18px;height:18px;border-radius:50%;
+  border:1.5px solid var(--b2);background:var(--bg4);display:flex;align-items:center;justify-content:center;transition:all var(--trans)
+}
+.draft-card.sel .draft-radio{border-color:var(--accent);background:var(--accent)}
+.draft-card.sel .draft-radio::after{content:'';display:block;width:7px;height:7px;border-radius:50%;background:#fff}
+.rating-row{margin-bottom:22px}
+.rating-q{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:10px;line-height:1.5}
+.rating-scale{display:flex;gap:6px}
+.r-btn{
+  width:42px;height:42px;border-radius:var(--r8);border:1px solid var(--b2);background:var(--bg3);
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t3);cursor:pointer;transition:all var(--trans);flex-shrink:0;
+}
+.r-btn:hover{border-color:var(--b3);color:var(--t1);background:var(--bg4)}
+.r-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.rating-labels{display:flex;justify-content:space-between;margin-top:7px;padding:0 2px}
+.r-lbl{font-size:11px;font-weight:500;color:var(--t2)}
+.fc-row{margin-bottom:22px}
+.fc-q{font-size:14px;font-weight:500;color:var(--t1);margin-bottom:10px;line-height:1.5}
+.fc-opts{display:flex;gap:8px;flex-wrap:wrap}
+.fc-btn{
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--rpill);
+  border:1px solid var(--b2);background:var(--bg3);color:var(--t2);cursor:pointer;transition:all var(--trans);
+}
+.fc-btn:hover{border-color:var(--b3);color:var(--t1);background:var(--bg4)}
+.fc-btn.chosen{background:var(--accent-soft);border-color:var(--accent-border);color:var(--accent2)}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+@media(max-width:540px){.compare-grid{grid-template-columns:1fr}}
+.cmp-col{background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r16);padding:22px}
+.cmp-col.b{background:var(--accent-soft2);border-color:var(--accent-border)}
+.cmp-label{font-size:11px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;color:var(--t3);margin-bottom:8px}
+.cmp-text{font-size:13px;font-weight:300;color:var(--t1);line-height:1.7;white-space:pre-wrap}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
+@media(max-width:440px){.act-grid{grid-template-columns:1fr}}
+.act-card{
+  background:var(--bg3);border:1px solid var(--b1);border-radius:var(--r12);padding:14px 16px;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--t2);text-align:left;display:flex;align-items:center;gap:10px;transition:all var(--trans)
+}
+.act-card:hover{background:var(--bg4);border-color:var(--b2);color:var(--t1);transform:translateY(-2px)}
+.act-card.done{background:var(--green-soft);border-color:var(--green-border);color:var(--green)}
+.act-icon{
+  width:28px;height:28px;min-width:28px;border-radius:var(--r8);background:var(--bg4);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;transition:all var(--trans);color:var(--t3)
+}
+.nyla-box{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r22);padding:36px 40px;margin-top:8px}
+@media(max-width:580px){.nyla-box{padding:24px 20px}}
+.nyla-logo{font-size:22px;font-weight:600;letter-spacing:-0.04em;color:var(--t1);margin-bottom:8px}
+.nyla-sub{font-size:14px;font-weight:300;color:var(--t2);line-height:1.65;margin-bottom:24px;max-width:440px}
+.nyla-box input[type=email]{background:var(--bg3);border-color:var(--b2);margin-bottom:10px}
+.nyla-confirm{font-size:13px;color:var(--green);margin-top:12px;display:none;align-items:center;gap:6px}
+.err{margin-top:10px;font-size:12px;color:#ff9696;display:none}
+.okmsg{margin-top:14px;font-size:13px;color:var(--green);display:none;align-items:center;gap:6px}
 </style>
 </head>
 <body>
 <div class="app">
-
   <div class="topbar">
     <span class="logo">nomi</span>
-    <span class="proto-badge">Research prototype</span>
   </div>
 
-  <div class="progress-wrap" id="progress-wrap">
-    <div class="prog-step" id="ps1"></div>
-    <div class="prog-step" id="ps2"></div>
-    <div class="prog-step" id="ps3"></div>
-    <div class="prog-step" id="ps4"></div>
-    <div class="prog-step" id="ps5"></div>
-    <div class="prog-step" id="ps6"></div>
-    <div class="prog-step" id="ps7"></div>
+  <div class="prog-wrap" id="prog">
+    <div class="prog-seg" id="ps1"></div>
+    <div class="prog-seg" id="ps2"></div>
+    <div class="prog-seg" id="ps3"></div>
+    <div class="prog-seg" id="ps4"></div>
+    <div class="prog-seg" id="ps5"></div>
+    <div class="prog-seg" id="ps6"></div>
+    <div class="prog-seg" id="ps7"></div>
   </div>
 
   <div class="screen active card" id="s1">
-    <div class="overline">RedNote · Nomi prototype</div>
-    <div class="display">Create a RedNote post<br>through a version of you</div>
-    <p class="body" style="margin-bottom:28px;max-width:480px">You'll generate a draft directly first, then generate one through a lightweight social self, then compare both to see which feels more like you.</p>
+    <div class="overline">NOMI</div>
+    <div class="display">Draft a post for any social media</div>
+    <p class="body" style="margin-bottom:28px;max-width:480px;color:rgb(236,236,236)">You'll generate a post draft in two ways: directly, and through a social character. Then you'll evaluate your experiences.</p>
 
-    <div style="margin-bottom:16px">
-      <label class="field-label" for="task-input">What do you want to post about?</label>
-      <input type="text" id="task-input" placeholder="e.g. My morning ritual that actually changed how I work">
+    <div style="margin-bottom:20px">
+      <label class="field-label" for="platform-select">Where will this post live? <span class="req">*</span></label>
+      <select id="platform-select">
+        <option value="" disabled selected>Select a platform</option>
+        <option>X</option>
+        <option>Instagram</option>
+        <option>LinkedIn</option>
+        <option>Threads</option>
+        <option>RedNote</option>
+        <option>TikTok</option>
+        <option>WeChat Moments</option>
+        <option>WeChat Official</option>
+        <option>Other</option>
+      </select>
+      <input type="text" id="plat-other-input" placeholder="Which platform?" style="display:none;margin-top:8px">
+      <div class="err" id="err-s1-platform"></div>
     </div>
-    <div style="margin-bottom:28px">
-      <label class="field-label" for="notes-input">Add rough notes, references, or angle <span class="opt">(optional)</span></label>
-      <textarea id="notes-input" rows="3" placeholder="e.g. I want to be honest about how inconsistent I was at first. More introspective than inspirational."></textarea>
+
+    <div style="margin-bottom:30px">
+      <label class="field-label" for="task-input">What do you want to post about? <span class="req">*</span></label>
+      <textarea id="task-input" rows="4" placeholder="Describe your idea and any context. e.g. My morning routine — honest tone, more personal than inspiring."></textarea>
+      <div class="err" id="err-s1-task"></div>
     </div>
-    <button class="btn btn-primary" onclick="startFlow()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      Start
-    </button>
+
+    <button class="btn btn-primary" onclick="startFlow()">Start</button>
   </div>
 
   <div class="screen card" id="s2">
-    <button class="btn-back" onclick="goScreen('s1')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="btn-back" onclick="go('s1')" style="margin-bottom:22px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
-    <div class="overline">Version A</div>
     <div class="h2" style="margin-bottom:6px">Direct generation</div>
-    <p class="body" style="margin-bottom:20px">Drafts generated from your task description alone — no identity context.</p>
+    <p class="body" style="margin-bottom:20px">Drafts generated from your description alone with no identity context.</p>
 
-    <div class="task-pill" id="s2-task-pill">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <span id="s2-task-text">Your task</span>
-    </div>
-
-    <div id="s2-pregeneate">
-      <button class="btn btn-primary" onclick="generateA()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Generate directly
-      </button>
+    <div id="s2-pre">
+      <button class="btn btn-primary" onclick="generateA()">Generate directly</button>
+      <div class="err" id="err-s2-gen"></div>
     </div>
 
     <div id="s2-results" style="display:none">
-      <div class="sec-label" style="margin-bottom:14px">Choose the draft you'd most likely post</div>
+      <div class="sec-label">Choose the draft you'd most likely post <span class="req">*</span></div>
       <div class="draft-grid" id="drafts-a"></div>
+      <div class="err" id="err-s2-draft"></div>
 
       <div class="div"></div>
       <div class="sec-label">Rate this version</div>
 
       <div class="rating-row">
-        <div class="rating-q">How much editing would your chosen draft need?</div>
-        <div class="rating-scale" id="r-a1">
+        <div class="rating-q">How much editing would your chosen draft need? <span class="req">*</span></div>
+        <div class="rating-scale">
           <button class="r-btn" onclick="rate(this,'ra1')">1</button>
           <button class="r-btn" onclick="rate(this,'ra1')">2</button>
           <button class="r-btn" onclick="rate(this,'ra1')">3</button>
@@ -224,8 +309,8 @@ textarea.open-q{min-height:80px}
       </div>
 
       <div class="rating-row">
-        <div class="rating-q">How well does this match how you want to show up on RedNote?</div>
-        <div class="rating-scale" id="r-a2">
+        <div class="rating-q">How well does this match how you want to show up on this platform? <span class="req">*</span></div>
+        <div class="rating-scale">
           <button class="r-btn" onclick="rate(this,'ra2')">1</button>
           <button class="r-btn" onclick="rate(this,'ra2')">2</button>
           <button class="r-btn" onclick="rate(this,'ra2')">3</button>
@@ -234,81 +319,83 @@ textarea.open-q{min-height:80px}
         </div>
         <div class="rating-labels"><span class="r-lbl">Doesn't match</span><span class="r-lbl">Perfect match</span></div>
       </div>
+      <div class="err" id="err-s2-ratings"></div>
 
       <div class="div"></div>
-      <button class="btn btn-primary" onclick="goScreen('s3')">
-        Now try with a social self
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <button class="btn btn-primary" onclick="goToS3()">
+        Now try with a character
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
   </div>
 
   <div class="screen card" id="s3">
-    <button class="btn-back" onclick="goScreen('s2')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="btn-back" onclick="go('s2')" style="margin-bottom:22px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
-    <div class="overline">Version B — Social self</div>
-    <div class="h2" style="margin-bottom:6px">Shape one version of you</div>
-    <p class="body" style="margin-bottom:28px;max-width:480px">Takes about 30 seconds. Choose a starting mode, tune a few dials, and tell it one thing about how you want to feel on RedNote.</p>
+    <div class="h2" style="margin-bottom:6px">Create a social character of you</div>
+    <p class="body" style="margin-bottom:28px;max-width:460px">What is your social character behind this post?</p>
 
     <div style="margin-bottom:28px">
-      <div class="sec-label">Starting mode</div>
+      <div class="sec-label">Starting mode <span class="req">*</span></div>
       <div class="mode-grid" id="mode-grid">
-        <div class="mode-card" tabindex="0" onclick="selMode(this,'Thoughtful diarist')" onkeydown="kbCard(event,this,'selMode','Thoughtful diarist')">
-          <div class="mode-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mode-card" tabindex="0" onclick="selMode(this,'Thoughtful diarist')" onkeydown="kb(event,this,'selMode','Thoughtful diarist')">
+          <div class="mode-check"><svg class="chk" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="mode-title">Thoughtful diarist</div>
           <div class="mode-sub">Reflective, honest, slow-burn</div>
         </div>
-        <div class="mode-card" tabindex="0" onclick="selMode(this,'Polished lifestyle sharer')" onkeydown="kbCard(event,this,'selMode','Polished lifestyle sharer')">
-          <div class="mode-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mode-card" tabindex="0" onclick="selMode(this,'Polished lifestyle sharer')" onkeydown="kb(event,this,'selMode','Polished lifestyle sharer')">
+          <div class="mode-check"><svg class="chk" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="mode-title">Polished lifestyle sharer</div>
           <div class="mode-sub">Curated, aesthetic, aspirational</div>
         </div>
-        <div class="mode-card" tabindex="0" onclick="selMode(this,'Soft intimate storyteller')" onkeydown="kbCard(event,this,'selMode','Soft intimate storyteller')">
-          <div class="mode-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mode-card" tabindex="0" onclick="selMode(this,'Soft intimate storyteller')" onkeydown="kb(event,this,'selMode','Soft intimate storyteller')">
+          <div class="mode-check"><svg class="chk" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="mode-title">Soft intimate storyteller</div>
           <div class="mode-sub">Warm, personal, tender</div>
         </div>
-        <div class="mode-card" tabindex="0" onclick="selMode(this,'Trend-aware curator')" onkeydown="kbCard(event,this,'selMode','Trend-aware curator')">
-          <div class="mode-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mode-card" tabindex="0" onclick="selMode(this,'Trend-aware curator')" onkeydown="kb(event,this,'selMode','Trend-aware curator')">
+          <div class="mode-check"><svg class="chk" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="mode-title">Trend-aware curator</div>
           <div class="mode-sub">Current, cultural, in-the-know</div>
         </div>
-        <div class="mode-card" tabindex="0" onclick="selMode(this,'Smart playful explainer')" onkeydown="kbCard(event,this,'selMode','Smart playful explainer')">
-          <div class="mode-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="mode-card" tabindex="0" onclick="selMode(this,'Smart playful explainer')" onkeydown="kb(event,this,'selMode','Smart playful explainer')">
+          <div class="mode-check"><svg class="chk" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
           <div class="mode-title">Smart playful explainer</div>
           <div class="mode-sub">Clear, witty, entertaining</div>
         </div>
       </div>
+      <div class="err" id="err-s3-mode"></div>
     </div>
 
     <div style="margin-bottom:28px">
       <div class="sec-label">Adjust identity controls</div>
       <div class="slider-row">
         <span class="sl-lbl">Soft</span>
-        <input type="range" min="0" max="100" value="40" id="sl-tone" oninput="updateSlider(this)">
+        <input type="range" min="0" max="100" value="38" id="sl-tone" oninput="syncSlider(this)">
         <span class="sl-lbl r">Sharp</span>
       </div>
       <div class="slider-row">
         <span class="sl-lbl">Personal</span>
-        <input type="range" min="0" max="100" value="35" id="sl-polish" oninput="updateSlider(this)">
+        <input type="range" min="0" max="100" value="35" id="sl-polish" oninput="syncSlider(this)">
         <span class="sl-lbl r">Polished</span>
       </div>
       <div class="slider-row">
         <span class="sl-lbl">Calm</span>
-        <input type="range" min="0" max="100" value="45" id="sl-energy" oninput="updateSlider(this)">
+        <input type="range" min="0" max="100" value="42" id="sl-energy" oninput="syncSlider(this)">
         <span class="sl-lbl r">Expressive</span>
       </div>
     </div>
 
     <div style="margin-bottom:28px">
-      <label class="field-label" for="self-feel">What should this version of you feel like on RedNote? <span class="opt">(optional)</span></label>
-      <textarea id="self-feel" rows="2" placeholder="e.g. Honest but not oversharing. Like a thoughtful friend, not a lifestyle brand."></textarea>
+      <label class="field-label" for="self-feel">How do you want to come across? <span class="req">*</span></label>
+      <textarea id="self-feel" rows="2" placeholder="e.g. Warm but not sentimental. Real, not polished."></textarea>
+      <div class="err" id="err-s3-self"></div>
     </div>
 
-    <div style="margin-bottom:32px">
-      <div class="sec-label">Visual vibe <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--text4)">(optional)</span></div>
+    <div style="margin-bottom:34px">
+      <div class="sec-label">Vibe <span style="text-transform:none;letter-spacing:0;font-weight:300;font-size:11px;color:var(--t3)">(optional)</span></div>
       <div class="chips">
         <span class="chip" tabindex="0" onclick="togChip(this)" onkeydown="kbChip(event,this)">Clean</span>
         <span class="chip" tabindex="0" onclick="togChip(this)" onkeydown="kbChip(event,this)">Cozy</span>
@@ -318,33 +405,26 @@ textarea.open-q{min-height:80px}
       </div>
     </div>
 
-    <button class="btn btn-primary" onclick="generateB()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Generate through this self
-    </button>
+    <button class="btn btn-primary" onclick="generateB()">Generate through this character</button>
+    <div class="err" id="err-s3-gen"></div>
   </div>
 
   <div class="screen card" id="s4">
-    <button class="btn-back" onclick="goScreen('s3')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="btn-back" onclick="go('s3')" style="margin-bottom:22px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
-    <div class="overline">Version B</div>
-    <div class="h2" style="margin-bottom:6px">Self-shaped drafts</div>
-    <p class="body" style="margin-bottom:8px">Drafts generated through your social self.</p>
-    <div class="task-pill" style="margin-bottom:20px">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      <span id="s4-mode-label">Thoughtful diarist</span>
-    </div>
-
-    <div class="sec-label" style="margin-bottom:14px">Choose the draft you'd most likely post</div>
+    <div class="h2" style="margin-bottom:6px">Character-shaped drafts</div>
+    <p class="body" style="margin-bottom:20px">Drafts generated through your description and your chosen character.</p>
+    <div class="sec-label">Choose the draft you'd most likely post <span class="req">*</span></div>
     <div class="draft-grid" id="drafts-b"></div>
+    <div class="err" id="err-s4-draft"></div>
 
     <div class="div"></div>
     <div class="sec-label">Rate this version</div>
 
     <div class="rating-row">
-      <div class="rating-q">How much editing would your chosen draft need?</div>
+      <div class="rating-q">How much editing would your chosen draft need? <span class="req">*</span></div>
       <div class="rating-scale">
         <button class="r-btn" onclick="rate(this,'rb1')">1</button>
         <button class="r-btn" onclick="rate(this,'rb1')">2</button>
@@ -356,7 +436,7 @@ textarea.open-q{min-height:80px}
     </div>
 
     <div class="rating-row">
-      <div class="rating-q">How well does this match the version of you you intended?</div>
+      <div class="rating-q">How well does this match the version of you you intended? <span class="req">*</span></div>
       <div class="rating-scale">
         <button class="r-btn" onclick="rate(this,'rb2')">1</button>
         <button class="r-btn" onclick="rate(this,'rb2')">2</button>
@@ -366,33 +446,32 @@ textarea.open-q{min-height:80px}
       </div>
       <div class="rating-labels"><span class="r-lbl">Doesn't match</span><span class="r-lbl">Perfect match</span></div>
     </div>
+    <div class="err" id="err-s4-ratings"></div>
 
     <div class="div"></div>
-    <button class="btn btn-primary" onclick="goScreen('s5')">
+    <button class="btn btn-primary" onclick="goToS5()">
       Compare both versions
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
   <div class="screen card" id="s5">
-    <button class="btn-back" onclick="goScreen('s4')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="btn-back" onclick="go('s4')" style="margin-bottom:22px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
     <div class="overline">Comparison</div>
-    <div class="h2" style="font-size:22px;margin-bottom:6px">Which version worked better?</div>
-    <p class="body" style="margin-bottom:24px">Your chosen draft from each version, side by side.</p>
+    <div class="h2" style="font-size:22px;letter-spacing:-0.03em;margin-bottom:6px">Which version worked better?</div>
+    <p class="body" style="margin-bottom:24px">Your chosen draft from each version.</p>
 
     <div class="compare-grid">
-      <div class="compare-col">
-        <div class="compare-badge a">A — Direct</div>
-        <div class="compare-label">Direct generation</div>
-        <div class="compare-text" id="cmp-a-text">Selected draft will appear here.</div>
+      <div class="cmp-col">
+        <div class="cmp-label">Direct</div>
+        <div class="cmp-text" id="cmp-a-text">Your selected draft will appear here.</div>
       </div>
-      <div class="compare-col b">
-        <div class="compare-badge b">B — Self-shaped</div>
-        <div class="compare-label">Self-shaped generation</div>
-        <div class="compare-text" id="cmp-b-text">Selected draft will appear here.</div>
+      <div class="cmp-col b">
+        <div class="cmp-label">Through a social character</div>
+        <div class="cmp-text" id="cmp-b-text">Your selected draft will appear here.</div>
       </div>
     </div>
 
@@ -400,75 +479,76 @@ textarea.open-q{min-height:80px}
     <div class="sec-label" style="margin-bottom:20px">Forced-choice comparison</div>
 
     <div class="fc-row">
-      <div class="fc-q">1. Which output better matches the version of you you wanted to express?</div>
+      <div class="fc-q">1. Which output better matches the version of you you wanted to express? <span class="req">*</span></div>
       <div class="fc-opts">
-        <button class="fc-btn" onclick="fc(this,'fc1')">A — Direct</button>
-        <button class="fc-btn" onclick="fc(this,'fc1')">B — Self-shaped</button>
+        <button class="fc-btn" onclick="fc(this,'fc1')">Direct</button>
+        <button class="fc-btn" onclick="fc(this,'fc1')">Social character</button>
         <button class="fc-btn" onclick="fc(this,'fc1')">Neither / Equal</button>
       </div>
     </div>
     <div class="fc-row">
-      <div class="fc-q">2. Which one would you be more likely to post?</div>
+      <div class="fc-q">2. Which one would you be more likely to post? <span class="req">*</span></div>
       <div class="fc-opts">
-        <button class="fc-btn" onclick="fc(this,'fc2')">A — Direct</button>
-        <button class="fc-btn" onclick="fc(this,'fc2')">B — Self-shaped</button>
+        <button class="fc-btn" onclick="fc(this,'fc2')">Direct</button>
+        <button class="fc-btn" onclick="fc(this,'fc2')">Social character</button>
         <button class="fc-btn" onclick="fc(this,'fc2')">Neither / Equal</button>
       </div>
     </div>
     <div class="fc-row">
-      <div class="fc-q">3. Which one would need less editing?</div>
+      <div class="fc-q">3. Which one would need less editing? <span class="req">*</span></div>
       <div class="fc-opts">
-        <button class="fc-btn" onclick="fc(this,'fc3')">A — Direct</button>
-        <button class="fc-btn" onclick="fc(this,'fc3')">B — Self-shaped</button>
+        <button class="fc-btn" onclick="fc(this,'fc3')">Direct</button>
+        <button class="fc-btn" onclick="fc(this,'fc3')">Social character</button>
         <button class="fc-btn" onclick="fc(this,'fc3')">Neither / Equal</button>
       </div>
     </div>
     <div class="fc-row">
-      <div class="fc-q">4. Which one felt easier to get to a usable result?</div>
+      <div class="fc-q">4. Which one felt easier to get to a usable result? <span class="req">*</span></div>
       <div class="fc-opts">
-        <button class="fc-btn" onclick="fc(this,'fc4')">A — Direct</button>
-        <button class="fc-btn" onclick="fc(this,'fc4')">B — Self-shaped</button>
+        <button class="fc-btn" onclick="fc(this,'fc4')">Direct</button>
+        <button class="fc-btn" onclick="fc(this,'fc4')">Social character</button>
         <button class="fc-btn" onclick="fc(this,'fc4')">Neither / Equal</button>
       </div>
     </div>
     <div class="fc-row">
-      <div class="fc-q">5. If you were doing this again, which path would you choose?</div>
+      <div class="fc-q">5. If you were doing this again, which path would you choose? <span class="req">*</span></div>
       <div class="fc-opts">
         <button class="fc-btn" onclick="fc(this,'fc5')">Generate directly</button>
-        <button class="fc-btn" onclick="fc(this,'fc5')">Shape a self first</button>
+        <button class="fc-btn" onclick="fc(this,'fc5')">Shape a character first</button>
         <button class="fc-btn" onclick="fc(this,'fc5')">Not sure</button>
       </div>
     </div>
+    <div class="err" id="err-s5-fc"></div>
 
     <div class="div"></div>
-    <button class="btn btn-primary" onclick="goScreen('s6')">
+    <button class="btn btn-primary" onclick="goToS6()">
       Continue
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
   <div class="screen card" id="s6">
-    <button class="btn-back" onclick="goScreen('s5')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="btn-back" onclick="go('s5')" style="margin-bottom:22px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
-    <div class="overline">Persistence & variation</div>
-    <div class="h2" style="margin-bottom:6px">What would you do with this self?</div>
-    <p class="body" style="margin-bottom:24px">Tap anything that feels useful or relevant to you.</p>
+    <div class="overline">For future</div>
+    <div class="h2" style="margin-bottom:6px">What would you do with this character?</div>
+    <p class="body" style="margin-bottom:24px">You don't need to do anything now. Just tap anything that feels useful to you.</p>
 
     <div class="act-grid">
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Save this self</button>
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Reuse this self later</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Save this character</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Reuse this character</button>
       <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Make another version</button>
       <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Make more polished</button>
       <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Make more playful</button>
     </div>
 
     <div class="div"></div>
-    <div class="sec-label" style="margin-bottom:16px">A few quick questions</div>
+    <div class="sec-label" style="margin-bottom:18px">A few quick questions</div>
 
     <div class="fc-row">
-      <div class="fc-q">Would you want to save this social self for future RedNote posts?</div>
+      <div class="fc-q">Would you want to save this social character for future posts on this social media? <span class="req">*</span></div>
       <div class="fc-opts">
         <button class="fc-btn" onclick="fc(this,'p1')">Yes, definitely</button>
         <button class="fc-btn" onclick="fc(this,'p1')">Maybe</button>
@@ -476,50 +556,53 @@ textarea.open-q{min-height:80px}
       </div>
     </div>
     <div class="fc-row">
-      <div class="fc-q">Would you want another version of yourself for a different kind of RedNote post?</div>
+      <div class="fc-q">Would you want another character for a different kind of post? <span class="req">*</span></div>
       <div class="fc-opts">
         <button class="fc-btn" onclick="fc(this,'p2')">Yes, definitely</button>
         <button class="fc-btn" onclick="fc(this,'p2')">Maybe</button>
         <button class="fc-btn" onclick="fc(this,'p2')">Not really</button>
       </div>
     </div>
+    <div class="err" id="err-s6-core"></div>
 
     <div style="margin-top:20px">
-      <label class="field-label" for="open-q">What would make this more useful over time?</label>
-      <textarea class="open-q" id="open-q" placeholder="Share anything that comes to mind…"></textarea>
+      <label class="field-label" for="open-q">What would make this more useful over time? <span class="opt">(optional)</span></label>
+      <textarea id="open-q" rows="3" placeholder="Share anything that comes to mind…"></textarea>
     </div>
 
     <div class="div"></div>
-    <button class="btn btn-primary" onclick="continueToScreen7()">
+    <button class="btn btn-primary" onclick="goToS7()">
       Continue
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
   <div class="screen card" id="s7">
-    <button class="btn-back" onclick="goScreen('s6')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    <button class="btn-back" onclick="go('s6')" style="margin-bottom:22px">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
     <div class="overline">What comes next</div>
     <div class="h2" style="margin-bottom:20px">One more concept to react to</div>
 
     <div class="nyla-box">
-      <div class="nyla-logo">nyla</div>
-      <p class="nyla-sub">Nyla helps you shape and manage different social selves over time — one for how you show up on RedNote, one for LinkedIn, one for your creative work — all in one place.</p>
-      <label class="field-label" style="color:rgba(255,255,255,.5);font-size:12px;margin-bottom:8px">Email address</label>
+      <div class="nyla-logo">Nyla</div>
+      <p class="nyla-sub">Nyla helps you shape and manage different social characters over time: one per platform, one per context, all in one place.</p>
+      <label class="field-label" for="nyla-email">Email address <span class="opt">(optional)</span></label>
       <input type="email" id="nyla-email" placeholder="your@email.com">
-      <button class="btn btn-primary" style="width:100%;justify-content:center;border-radius:var(--r8);margin-top:4px" onclick="joinWaitlist()">
-        Join the waitlist
-      </button>
-      <div class="nyla-confirm" id="nyla-confirm">You're on the list.</div>
+      <button class="btn btn-primary" style="width:100%;border-radius:var(--r8);margin-top:2px" onclick="joinWL()">Join the waitlist</button>
+      <div class="nyla-confirm" id="nyla-confirm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        You're on the list.
+      </div>
+      <div class="err" id="err-s7-email"></div>
     </div>
 
     <div class="div"></div>
-    <div class="sec-label" style="margin-bottom:16px">Rate this concept</div>
+    <div class="sec-label" style="margin-bottom:18px">Rate this concept</div>
 
     <div class="rating-row">
-      <div class="rating-q">How interesting is the idea of Nyla to you?</div>
+      <div class="rating-q">How interesting is the idea of Nyla to you? <span class="req">*</span></div>
       <div class="rating-scale">
         <button class="r-btn" onclick="rate(this,'rn1')">1</button>
         <button class="r-btn" onclick="rate(this,'rn1')">2</button>
@@ -531,41 +614,47 @@ textarea.open-q{min-height:80px}
     </div>
 
     <div class="fc-row">
-      <div class="fc-q">Would you join the waitlist for Nyla?</div>
+      <div class="rating-q" style="font-size:13px">Would you join the waitlist for Nyla? <span class="req">*</span></div>
       <div class="fc-opts">
         <button class="fc-btn" onclick="fc(this,'n1')">Yes</button>
         <button class="fc-btn" onclick="fc(this,'n1')">Maybe</button>
         <button class="fc-btn" onclick="fc(this,'n1')">No</button>
       </div>
     </div>
-  </div>
+    <div class="err" id="err-s7-core"></div>
 
+    <div class="div"></div>
+    <button class="btn btn-primary" onclick="submitRatings()" style="font-size:14px;padding:11px 24px">Submit ratings</button>
+    <div id="submit-confirm" class="okmsg">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Thank you — your responses have been recorded.
+    </div>
+  </div>
 </div>
 
 <script>
 var sessionId = null;
+var selectedPlatform = '';
+var platformOther = '';
 var taskText = '';
 var notesText = '';
 var selectedMode = '';
-var chosenDraftA = null;
-var chosenDraftB = null;
-var draftsAData = [];
-var draftsBData = [];
-var draftGenerationIdA = null;
-var draftGenerationIdB = null;
-var feedbackSaved = false;
-var savingFeedback = false;
+var chosenA = null;
+var chosenB = null;
+var draftsA = [];
+var draftsB = [];
+var generationIdA = null;
+var generationIdB = null;
+var waitlistJoined = false;
+var submitCompleted = false;
 
 var responses = {
   ratings: {},
   forcedChoice: {},
   actions: [],
-  openFeedback: '',
-  waitlistInterest: null,
-  nylaInterestScore: null,
+  selectedDraftAIndex: null,
+  selectedDraftBIndex: null
 };
-
-var imgIcon = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
 
 function getOrCreateSessionId() {
   if (!sessionId) {
@@ -575,24 +664,35 @@ function getOrCreateSessionId() {
   return sessionId;
 }
 
+function clearErrors() {
+  document.querySelectorAll('.err').forEach(function(el){ el.style.display = 'none'; el.textContent = ''; });
+}
+
+function showError(id, message) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = message;
+  el.style.display = 'block';
+}
+
+function safeJsonFromResponse(res) {
+  return res.text().then(function(text){
+    try { return text ? JSON.parse(text) : {}; }
+    catch(e) { return { error: text || 'Non-JSON error response from server' }; }
+  });
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function getSelectedVibes() {
   return Array.from(document.querySelectorAll('.chip.on')).map(function(el){ return el.textContent.trim(); });
-}
-
-function defaultDraftsA(topic) {
-  return [
-    {title:'A direct opening', body:'I wanted to write about ' + topic + ' in a simple way. No persona, no extra framing, just the idea itself and why it mattered to me.', tone:'Direct · Clear'},
-    {title:'What changed for me', body:'This post is really about ' + topic + '. I want it to feel honest, specific, and easy to read without sounding over-written.', tone:'Honest · Conversational'},
-    {title:'A simple reflection', body:'Lately I have been thinking about ' + topic + ' and why it shifted something in my day-to-day life. Here is the version I would actually share.', tone:'Reflective · Natural'}
-  ];
-}
-
-function defaultDraftsB(topic, mode) {
-  return [
-    {title: mode + ' draft 1', body:'Through this version of me, I would talk about ' + topic + ' with more intention, more voice, and a clearer sense of how I want to come across.', tone:'Self-shaped · Coherent'},
-    {title: mode + ' draft 2', body:'This version keeps the same topic, ' + topic + ', but the writing is shaped by the social self I selected instead of only the raw task.', tone:'Intentional · Specific'},
-    {title: mode + ' draft 3', body:'I still want to say something real about ' + topic + ', but in a way that feels more like the version of me I meant to express.', tone:'Persona-led · Natural'}
-  ];
 }
 
 function setButtonLoading(btn, loading, loadingText) {
@@ -607,58 +707,135 @@ function setButtonLoading(btn, loading, loadingText) {
   }
 }
 
-function showInlineMessage(container, message, isError) {
-  if (!container) return;
-  var id = 'inline-msg';
-  var el = container.querySelector('#' + id);
-  if (!el) {
-    el = document.createElement('div');
-    el.id = id;
-    el.style.marginTop = '12px';
-    el.style.fontSize = '13px';
-    container.appendChild(el);
-  }
-  el.style.color = isError ? '#b91c1c' : '#2563eb';
-  el.textContent = message;
+function syncSlider(el){
+  el.style.setProperty('--pct', el.value+'%');
 }
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+document.querySelectorAll('input[type=range]').forEach(function(s){
+  s.style.setProperty('--pct', s.value+'%');
+});
 
 function startFlow() {
-  taskText = document.getElementById('task-input').value.trim() || 'My morning ritual that actually changed how I work';
-  notesText = document.getElementById('notes-input').value.trim();
+  clearErrors();
+
+  var platform = document.getElementById('platform-select').value;
+  var task = document.getElementById('task-input').value.trim();
+  var other = document.getElementById('plat-other-input').value.trim();
+
+  if (!platform) {
+    showError('err-s1-platform', 'Please select a platform.');
+    return;
+  }
+  if (platform === 'Other' && !other) {
+    showError('err-s1-platform', 'Please type the platform name.');
+    return;
+  }
+  if (!task) {
+    showError('err-s1-task', 'Please describe what you want to post about.');
+    return;
+  }
+
+  selectedPlatform = platform;
+  platformOther = other;
+  taskText = task;
+  notesText = task;
   getOrCreateSessionId();
-  document.getElementById('s2-task-text').textContent = taskText;
-  goScreen('s2');
+  go('s2');
 }
 
-async function safeJsonFromResponse(res) {
-  const text = await res.text();
-  try {
-    return text ? JSON.parse(text) : {};
-  } catch (e) {
-    return { error: text || 'Non-JSON error response from server' };
+function buildDrafts(targetId, data, version) {
+  var html = '';
+  data.forEach(function(d, i) {
+    html += '<div class="draft-card" tabindex="0" onclick="selDraft(this, \'' + version + '\', ' + i + ')" onkeydown="kbDraft(event, this, \'' + version + '\', ' + i + ')">';
+    html += '<div class="draft-radio"></div>';
+    html += '<div class="draft-title">' + escapeHtml(d.title || '') + '</div>';
+    html += '<div class="draft-body">' + escapeHtml(d.body || '') + '</div>';
+    html += '<span class="draft-tone">' + escapeHtml(d.tone || '') + '</span>';
+    html += '</div>';
+  });
+  document.getElementById(targetId).innerHTML = html;
+}
+
+function selDraft(el, ver, idx){
+  el.closest('.draft-grid').querySelectorAll('.draft-card').forEach(function(c){ c.classList.remove('sel'); });
+  el.classList.add('sel');
+
+  if (ver === 'a') {
+    chosenA = draftsA[idx];
+    responses.selectedDraftAIndex = idx;
+  } else {
+    chosenB = draftsB[idx];
+    responses.selectedDraftBIndex = idx;
+  }
+
+  if (chosenA) document.getElementById('cmp-a-text').textContent = '"' + chosenA.title + '"\n\n' + chosenA.body;
+  if (chosenB) document.getElementById('cmp-b-text').textContent = '"' + chosenB.title + '"\n\n' + chosenB.body;
+}
+
+function kbDraft(e, el, ver, idx){
+  if(e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    selDraft(el, ver, idx);
   }
 }
 
-async function generateA() {
-  var btn = document.querySelector('#s2-pregeneate .btn-primary');
+function selMode(el, name){
+  document.querySelectorAll('.mode-card').forEach(function(c){ c.classList.remove('sel'); });
+  el.classList.add('sel');
+  selectedMode = name;
+}
+
+function kb(e,el,fn,arg){
+  if(e.key === 'Enter' || e.key === ' '){
+    e.preventDefault();
+    window[fn](el,arg);
+  }
+}
+
+function togChip(el){ el.classList.toggle('on'); }
+
+function kbChip(e,el){
+  if(e.key==='Enter' || e.key===' '){
+    e.preventDefault();
+    togChip(el);
+  }
+}
+
+function rate(el, grp){
+  el.closest('.rating-scale').querySelectorAll('.r-btn').forEach(function(b){ b.classList.remove('on'); });
+  el.classList.add('on');
+  responses.ratings[grp] = el.textContent.trim();
+}
+
+function fc(el, grp){
+  el.closest('.fc-opts').querySelectorAll('.fc-btn').forEach(function(b){ b.classList.remove('chosen'); });
+  el.classList.add('chosen');
+  responses.forcedChoice[grp] = el.textContent.trim();
+}
+
+function togAct(el){
+  el.classList.toggle('done');
+  var label = el.textContent.trim().replace(/\s+/g, ' ');
+  if (el.classList.contains('done')) {
+    if (!responses.actions.includes(label)) responses.actions.push(label);
+  } else {
+    responses.actions = responses.actions.filter(function(x){ return x !== label; });
+  }
+}
+
+async function generateA(){
+  clearErrors();
+  var btn = document.querySelector('#s2-pre .btn-primary');
   setButtonLoading(btn, true, 'Generating...');
-  showInlineMessage(document.getElementById('s2-pregeneate'), 'Calling OpenAI for Version A...', false);
 
   try {
     var res = await fetch('/api/generate-a', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sessionId: getOrCreateSessionId(),
+        platform: selectedPlatform,
+        platformOther: platformOther,
         task: taskText,
         notes: notesText
       })
@@ -667,43 +844,65 @@ async function generateA() {
     var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate Version A');
 
-    draftsAData = data.drafts || defaultDraftsA(taskText);
-    draftGenerationIdA = data.generationId || null;
-    buildDrafts('drafts-a', draftsAData, 'a');
-    document.getElementById('s2-pregeneate').style.display = 'none';
+    draftsA = data.drafts || [];
+    generationIdA = data.generationId || null;
+    buildDrafts('drafts-a', draftsA, 'a');
+    document.getElementById('s2-pre').style.display = 'none';
     document.getElementById('s2-results').style.display = 'block';
   } catch (err) {
-    console.error('VERSION A ERROR', err);
-    draftsAData = defaultDraftsA(taskText);
-    buildDrafts('drafts-a', draftsAData, 'a');
-    document.getElementById('s2-pregeneate').style.display = 'none';
-    document.getElementById('s2-results').style.display = 'block';
-    showInlineMessage(document.getElementById('s2-results'), 'VERSION A ERROR: ' + (err.message || 'unknown error') + '. Fallback drafts are shown.', true);
+    console.error(err);
+    showError('err-s2-gen', err.message || 'Could not generate direct drafts.');
   } finally {
     setButtonLoading(btn, false);
   }
 }
 
-async function generateB() {
-  var modeKey = selectedMode || 'Thoughtful diarist';
-  document.getElementById('s4-mode-label').textContent = modeKey;
+function goToS3() {
+  clearErrors();
+  if (responses.selectedDraftAIndex == null) {
+    showError('err-s2-draft', 'Please select one direct-generation draft.');
+    return;
+  }
+  if (!responses.ratings.ra1 || !responses.ratings.ra2) {
+    showError('err-s2-ratings', 'Please answer both rating questions.');
+    return;
+  }
+  go('s3');
+}
+
+async function generateB(){
+  clearErrors();
+
+  if (!selectedMode) {
+    showError('err-s3-mode', 'Please choose a starting mode.');
+    return;
+  }
+
+  var selfFeel = document.getElementById('self-feel').value.trim();
+  if (!selfFeel) {
+    showError('err-s3-self', 'Please describe how you want to come across.');
+    return;
+  }
+
   var btn = document.querySelector('#s3 .btn-primary');
   setButtonLoading(btn, true, 'Generating...');
 
   try {
     var res = await fetch('/api/generate-b', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sessionId: getOrCreateSessionId(),
+        platform: selectedPlatform,
+        platformOther: platformOther,
         task: taskText,
         notes: notesText,
         selfProfile: {
-          mode: modeKey,
-          tone: Number(document.getElementById('sl-tone').value),
-          polish: Number(document.getElementById('sl-polish').value),
-          energy: Number(document.getElementById('sl-energy').value),
-          selfFeel: document.getElementById('self-feel').value.trim(),
+          mode: selectedMode,
+          tone: document.getElementById('sl-tone').value,
+          polish: document.getElementById('sl-polish').value,
+          energy: document.getElementById('sl-energy').value,
+          selfFeel: selfFeel,
           vibes: getSelectedVibes()
         }
       })
@@ -712,120 +911,67 @@ async function generateB() {
     var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate Version B');
 
-    draftsBData = data.drafts || defaultDraftsB(taskText, modeKey);
-    draftGenerationIdB = data.generationId || null;
-    buildDrafts('drafts-b', draftsBData, 'b');
-    goScreen('s4');
+    draftsB = data.drafts || [];
+    generationIdB = data.generationId || null;
+    buildDrafts('drafts-b', draftsB, 'b');
+    go('s4');
   } catch (err) {
-    console.error('VERSION B ERROR', err);
-    draftsBData = defaultDraftsB(taskText, modeKey);
-    buildDrafts('drafts-b', draftsBData, 'b');
-    goScreen('s4');
-    showInlineMessage(document.getElementById('s4'), 'VERSION B ERROR: ' + (err.message || 'unknown error') + '. Fallback drafts are shown.', true);
+    console.error(err);
+    showError('err-s3-gen', err.message || 'Could not generate character-shaped drafts.');
   } finally {
     setButtonLoading(btn, false);
   }
 }
 
-function buildDrafts(containerId, data, version) {
-  var html = '';
-  data.forEach(function(d, i) {
-    html += '<div class="draft-card" tabindex="0" onclick="selDraft(this, \'' + version + '\', ' + i + ')" onkeydown="kbDraft(event, this, \'' + version + '\', ' + i + ')">';
-    html += '<div class="draft-radio"></div>';
-    html += '<div class="draft-img">' + imgIcon + '</div>';
-    html += '<div class="draft-title">' + escapeHtml(d.title || '') + '</div>';
-    html += '<div class="draft-body">' + escapeHtml(d.body || '') + '</div>';
-    html += '<span class="draft-tone">' + escapeHtml(d.tone || '') + '</span>';
-    html += '</div>';
-  });
-  document.getElementById(containerId).innerHTML = html;
-}
-
-function selDraft(el, version, idx) {
-  var container = el.closest('.draft-grid');
-  container.querySelectorAll('.draft-card').forEach(function(c){ c.classList.remove('sel'); });
-  el.classList.add('sel');
-
-  if (version === 'a') {
-    chosenDraftA = draftsAData[idx];
-    responses.selectedDraftAIndex = idx;
-  } else {
-    chosenDraftB = draftsBData[idx];
-    responses.selectedDraftBIndex = idx;
+function goToS5() {
+  clearErrors();
+  if (responses.selectedDraftBIndex == null) {
+    showError('err-s4-draft', 'Please select one character-shaped draft.');
+    return;
   }
-
-  if (chosenDraftA) document.getElementById('cmp-a-text').textContent = chosenDraftA.title + ' — ' + chosenDraftA.body;
-  if (chosenDraftB) document.getElementById('cmp-b-text').textContent = chosenDraftB.title + ' — ' + chosenDraftB.body;
-}
-
-function kbDraft(e, el, version, idx) {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    selDraft(el, version, idx);
+  if (!responses.ratings.rb1 || !responses.ratings.rb2) {
+    showError('err-s4-ratings', 'Please answer both rating questions.');
+    return;
   }
+  go('s5');
 }
 
-function selMode(el, name) {
-  document.querySelectorAll('.mode-card').forEach(function(c){ c.classList.remove('sel'); });
-  el.classList.add('sel');
-  selectedMode = name;
-}
-
-function kbCard(e, el, fn, arg) {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    window[fn](el, arg);
+function goToS6() {
+  clearErrors();
+  var keys = ['fc1','fc2','fc3','fc4','fc5'];
+  var missing = keys.some(function(k){ return !responses.forcedChoice[k]; });
+  if (missing) {
+    showError('err-s5-fc', 'Please answer all comparison questions.');
+    return;
   }
+  go('s6');
 }
 
-function togChip(el) { el.classList.toggle('on'); }
-function kbChip(e, el) {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    togChip(el);
+function goToS7() {
+  clearErrors();
+  if (!responses.forcedChoice.p1 || !responses.forcedChoice.p2) {
+    showError('err-s6-core', 'Please answer both future-use questions.');
+    return;
   }
+  go('s7');
 }
 
-function rate(el, group) {
-  var parent = el.closest('.rating-scale');
-  parent.querySelectorAll('.r-btn').forEach(function(b){ b.classList.remove('on'); });
-  el.classList.add('on');
-  responses.ratings[group] = Number(el.textContent.trim());
-  if (group === 'rn1') responses.nylaInterestScore = Number(el.textContent.trim());
-}
-
-function fc(el, group) {
-  var parent = el.closest('.fc-opts');
-  parent.querySelectorAll('.fc-btn').forEach(function(b){ b.classList.remove('chosen'); });
-  el.classList.add('chosen');
-  responses.forcedChoice[group] = el.textContent.trim();
-  if (group === 'n1') responses.waitlistInterest = el.textContent.trim();
-}
-
-function togAct(el) {
-  el.classList.toggle('done');
-  var label = el.textContent.trim().replace(/\s+/g, ' ');
-  if (el.classList.contains('done')) {
-    if (!responses.actions.includes(label)) responses.actions.push(label);
-  } else {
-    responses.actions = responses.actions.filter(function(item){ return item !== label; });
-  }
-}
-
-async function joinWaitlist() {
+async function joinWL() {
+  clearErrors();
   var email = document.getElementById('nyla-email').value.trim();
+
   if (!email) {
-    alert('Please enter an email address first.');
+    showError('err-s7-email', 'Enter an email if you want to join the waitlist.');
     return;
   }
 
-  var btn = document.querySelector('#s7 .btn-primary');
+  var btn = document.querySelector('#s7 .nyla-box .btn-primary');
   setButtonLoading(btn, true, 'Joining...');
 
   try {
     var res = await fetch('/api/join-waitlist', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sessionId: getOrCreateSessionId(),
         email: email,
@@ -834,124 +980,112 @@ async function joinWaitlist() {
     });
 
     var data = await safeJsonFromResponse(res);
-    if (!res.ok) throw new Error(data.error || 'Failed to save email');
+    if (!res.ok) throw new Error(data.error || 'Failed to join waitlist');
 
+    waitlistJoined = true;
     document.getElementById('nyla-confirm').style.display = 'flex';
   } catch (err) {
-    console.error('WAITLIST ERROR', err);
-    alert('WAITLIST ERROR: ' + (err.message || 'unknown error'));
+    console.error(err);
+    showError('err-s7-email', err.message || 'Could not join the waitlist.');
   } finally {
     setButtonLoading(btn, false);
   }
 }
 
-function updateSlider(input) {
-  var val = input.value;
-  input.style.setProperty('--val', val + '%');
-}
+async function submitRatings() {
+  clearErrors();
 
-document.querySelectorAll('input[type=range]').forEach(function(sl) {
-  sl.style.setProperty('--val', sl.value + '%');
-});
+  if (!responses.ratings.rn1 || !responses.forcedChoice.n1) {
+    showError('err-s7-core', 'Please answer both Nyla questions before submitting.');
+    return;
+  }
 
-var screenOrder = ['s1','s2','s3','s4','s5','s6','s7'];
-
-async function saveStudyResponse() {
-  if (feedbackSaved || savingFeedback) return true;
-  savingFeedback = true;
-  responses.openFeedback = document.getElementById('open-q').value.trim();
+  var btn = document.querySelector('#s7 > .btn-primary');
+  setButtonLoading(btn, true, 'Submitting...');
 
   try {
     var res = await fetch('/api/save-response', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         sessionId: getOrCreateSessionId(),
+        platform: selectedPlatform,
+        platformOther: platformOther,
         task: taskText,
         notes: notesText,
         versionA: {
-          generationId: draftGenerationIdA,
+          generationId: generationIdA,
           selectedDraftIndex: responses.selectedDraftAIndex,
-          selectedDraft: chosenDraftA,
-          editScore: responses.ratings.ra1 || null,
-          matchScore: responses.ratings.ra2 || null,
-          drafts: draftsAData
+          selectedDraft: chosenA,
+          editScore: responses.ratings.ra1 || '',
+          matchScore: responses.ratings.ra2 || ''
         },
         versionB: {
-          generationId: draftGenerationIdB,
-          mode: selectedMode || 'Thoughtful diarist',
-          tone: Number(document.getElementById('sl-tone').value),
-          polish: Number(document.getElementById('sl-polish').value),
-          energy: Number(document.getElementById('sl-energy').value),
+          generationId: generationIdB,
+          mode: selectedMode,
+          tone: document.getElementById('sl-tone').value,
+          polish: document.getElementById('sl-polish').value,
+          energy: document.getElementById('sl-energy').value,
           selfFeel: document.getElementById('self-feel').value.trim(),
           vibes: getSelectedVibes(),
           selectedDraftIndex: responses.selectedDraftBIndex,
-          selectedDraft: chosenDraftB,
-          editScore: responses.ratings.rb1 || null,
-          matchScore: responses.ratings.rb2 || null,
-          drafts: draftsBData
+          selectedDraft: chosenB,
+          editScore: responses.ratings.rb1 || '',
+          matchScore: responses.ratings.rb2 || ''
         },
         comparison: {
-          betterMatch: responses.forcedChoice.fc1 || null,
-          moreLikelyToPost: responses.forcedChoice.fc2 || null,
-          lessEditing: responses.forcedChoice.fc3 || null,
-          easierResult: responses.forcedChoice.fc4 || null,
-          nextTimePath: responses.forcedChoice.fc5 || null
+          betterMatch: responses.forcedChoice.fc1 || '',
+          moreLikelyToPost: responses.forcedChoice.fc2 || '',
+          lessEditing: responses.forcedChoice.fc3 || '',
+          easierResult: responses.forcedChoice.fc4 || '',
+          nextTimePath: responses.forcedChoice.fc5 || ''
         },
         persistence: {
           actionSelections: responses.actions,
-          saveSelfIntent: responses.forcedChoice.p1 || null,
-          variationIntent: responses.forcedChoice.p2 || null,
-          openFeedback: responses.openFeedback
+          saveSelfIntent: responses.forcedChoice.p1 || '',
+          variationIntent: responses.forcedChoice.p2 || '',
+          openFeedback: document.getElementById('open-q').value.trim()
         },
         nyla: {
-          interestScore: responses.nylaInterestScore || null,
-          waitlistIntent: responses.waitlistInterest || null
-        }
+          interestScore: responses.ratings.rn1 || '',
+          waitlistIntent: responses.forcedChoice.n1 || ''
+        },
+        submitCompletedAt: new Date().toISOString()
       })
     });
 
     var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to save response');
 
-    feedbackSaved = true;
-    return true;
+    submitCompleted = true;
+    document.getElementById('submit-confirm').style.display = 'flex';
   } catch (err) {
-    console.error('SAVE RESPONSE ERROR', err);
-    alert('SAVE RESPONSE ERROR: ' + (err.message || 'unknown error'));
-    return false;
+    console.error(err);
+    showError('err-s7-core', err.message || 'Could not submit ratings.');
   } finally {
-    savingFeedback = false;
+    setButtonLoading(btn, false);
   }
 }
 
-async function continueToScreen7() {
-  var ok = await saveStudyResponse();
-  if (ok) goScreen('s7');
-}
+var screens = ['s1','s2','s3','s4','s5','s6','s7'];
 
-function goScreen(id) {
+function go(id){
   document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
   var el = document.getElementById(id);
   el.classList.add('active');
-  el.style.animation = 'none';
-  el.offsetHeight;
-  el.style.animation = '';
-  updateProgress(id);
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-function updateProgress(activeId) {
-  var idx = screenOrder.indexOf(activeId);
-  for (var i = 0; i < 7; i++) {
-    var dot = document.getElementById('ps' + (i+1));
-    if (i < idx) dot.className = 'prog-step done';
-    else if (i === idx) dot.className = 'prog-step active';
-    else dot.className = 'prog-step';
+  var idx = screens.indexOf(id);
+  for(var i=0;i<7;i++){
+    var seg = document.getElementById('ps'+(i+1));
+    seg.className = 'prog-seg' + (i<idx ? ' done' : i===idx ? ' active' : '');
   }
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-updateProgress('s1');
+document.getElementById('platform-select').addEventListener('change', function() {
+  document.getElementById('plat-other-input').style.display = this.value === 'Other' ? 'block' : 'none';
+});
+
+go('s1');
 </script>
 </body>
 </html>
