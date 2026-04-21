@@ -9,14 +9,24 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
   try {
     const payload = req.body || {};
     const { sessionId, task, notes, versionA, versionB, comparison, persistence, nyla } = payload;
+
+    console.log('SAVE RESPONSE ROUTE HIT', {
+      sessionId,
+      task,
+      hasVersionA: !!versionA,
+      hasVersionB: !!versionB,
+    });
+
     if (!sessionId) {
       return res.status(400).json({ error: 'sessionId is required' });
     }
 
     const { responsesTable } = getAirtableConfig();
+
     await createRecord(responsesTable, {
       session_id: sessionId,
       task: task || '',
@@ -53,7 +63,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ ok: true });
   } catch (error) {
-    console.error(error);
+    console.error('SAVE RESPONSE ERROR', error);
     return res.status(500).json({ error: error.message || 'Failed to save response' });
   }
 }
