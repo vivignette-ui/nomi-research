@@ -370,13 +370,13 @@ textarea.open-q{min-height:80px}
     <div class="div"></div>
     <button class="btn btn-primary" onclick="goScreen('s5')">
       Compare both versions
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
   <div class="screen card" id="s5">
     <button class="btn-back" onclick="goScreen('s4')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
     <div class="overline">Comparison</div>
@@ -443,13 +443,13 @@ textarea.open-q{min-height:80px}
     <div class="div"></div>
     <button class="btn btn-primary" onclick="goScreen('s6')">
       Continue
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
   <div class="screen card" id="s6">
     <button class="btn-back" onclick="goScreen('s5')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
     <div class="overline">Persistence & variation</div>
@@ -457,11 +457,11 @@ textarea.open-q{min-height:80px}
     <p class="body" style="margin-bottom:24px">Tap anything that feels useful or relevant to you.</p>
 
     <div class="act-grid">
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg></div>Save this self</button>
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>Reuse this self later</button>
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Make another version</button>
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>Make more polished</button>
-      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>Make more playful</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Save this self</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Reuse this self later</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Make another version</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Make more polished</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon">+</div>Make more playful</button>
     </div>
 
     <div class="div"></div>
@@ -639,8 +639,17 @@ function startFlow() {
   goScreen('s2');
 }
 
+async function safeJsonFromResponse(res) {
+  const text = await res.text();
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch (e) {
+    return { error: text || 'Non-JSON error response from server' };
+  }
+}
+
 async function generateA() {
-  var btn = event && event.currentTarget ? event.currentTarget : document.querySelector('#s2-pregeneate .btn-primary');
+  var btn = document.querySelector('#s2-pregeneate .btn-primary');
   setButtonLoading(btn, true, 'Generating...');
   showInlineMessage(document.getElementById('s2-pregeneate'), 'Calling OpenAI for Version A...', false);
 
@@ -655,7 +664,7 @@ async function generateA() {
       })
     });
 
-    var data = await res.json();
+    var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate Version A');
 
     draftsAData = data.drafts || defaultDraftsA(taskText);
@@ -678,7 +687,7 @@ async function generateA() {
 async function generateB() {
   var modeKey = selectedMode || 'Thoughtful diarist';
   document.getElementById('s4-mode-label').textContent = modeKey;
-  var btn = event && event.currentTarget ? event.currentTarget : document.querySelector('#s3 .btn-primary');
+  var btn = document.querySelector('#s3 .btn-primary');
   setButtonLoading(btn, true, 'Generating...');
 
   try {
@@ -700,7 +709,7 @@ async function generateB() {
       })
     });
 
-    var data = await res.json();
+    var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to generate Version B');
 
     draftsBData = data.drafts || defaultDraftsB(taskText, modeKey);
@@ -810,7 +819,7 @@ async function joinWaitlist() {
     return;
   }
 
-  var btn = event && event.currentTarget ? event.currentTarget : document.querySelector('#s7 .btn-primary');
+  var btn = document.querySelector('#s7 .btn-primary');
   setButtonLoading(btn, true, 'Joining...');
 
   try {
@@ -824,7 +833,7 @@ async function joinWaitlist() {
       })
     });
 
-    var data = await res.json();
+    var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to save email');
 
     document.getElementById('nyla-confirm').style.display = 'flex';
@@ -902,7 +911,7 @@ async function saveStudyResponse() {
       })
     });
 
-    var data = await res.json();
+    var data = await safeJsonFromResponse(res);
     if (!res.ok) throw new Error(data.error || 'Failed to save response');
 
     feedbackSaved = true;
