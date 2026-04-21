@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'selfProfile.mode is required' });
     }
 
-    const model = process.env.OPENAI_MODEL || 'gpt-4.1-mini';
+    const model = process.env.OPENAI_MODEL || 'gpt-5.4-mini';
     const resolvedPlatform =
       platform === 'Other'
         ? (platformOther || 'social media')
