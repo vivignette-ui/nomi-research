@@ -12,14 +12,19 @@ export default async function handler(req, res) {
 
   try {
     const payload = req.body || {};
-    const { sessionId, task, notes, versionA, versionB, comparison, persistence, nyla } = payload;
-
-    console.log('SAVE RESPONSE ROUTE HIT', {
+    const {
       sessionId,
+      platform,
+      platformOther,
       task,
-      hasVersionA: !!versionA,
-      hasVersionB: !!versionB,
-    });
+      notes,
+      versionA,
+      versionB,
+      comparison,
+      persistence,
+      nyla,
+      submitCompletedAt,
+    } = payload;
 
     if (!sessionId) {
       return res.status(400).json({ error: 'sessionId is required' });
@@ -29,22 +34,24 @@ export default async function handler(req, res) {
 
     await createRecord(responsesTable, {
       session_id: sessionId,
+      platform: platform || '',
+      platform_other: platformOther || '',
       task: task || '',
       notes: notes || '',
       version_a_generation_id: versionA?.generationId || '',
       version_b_generation_id: versionB?.generationId || '',
-      version_a_selected_index: versionA?.selectedDraftIndex ?? '',
-      version_b_selected_index: versionB?.selectedDraftIndex ?? '',
+      version_a_selected_index: String(versionA?.selectedDraftIndex ?? ''),
+      version_b_selected_index: String(versionB?.selectedDraftIndex ?? ''),
       version_a_selected_draft: serialize(versionA?.selectedDraft),
       version_b_selected_draft: serialize(versionB?.selectedDraft),
-      version_a_edit_score: versionA?.editScore ?? '',
-      version_a_match_score: versionA?.matchScore ?? '',
-      version_b_edit_score: versionB?.editScore ?? '',
-      version_b_match_score: versionB?.matchScore ?? '',
+      version_a_edit_score: String(versionA?.editScore ?? ''),
+      version_a_match_score: String(versionA?.matchScore ?? ''),
+      version_b_edit_score: String(versionB?.editScore ?? ''),
+      version_b_match_score: String(versionB?.matchScore ?? ''),
       self_mode: versionB?.mode || '',
-      self_tone: versionB?.tone ?? '',
-      self_polish: versionB?.polish ?? '',
-      self_energy: versionB?.energy ?? '',
+      self_tone: String(versionB?.tone ?? ''),
+      self_polish: String(versionB?.polish ?? ''),
+      self_energy: String(versionB?.energy ?? ''),
       self_feel: versionB?.selfFeel || '',
       self_vibes: (versionB?.vibes || []).join(', '),
       compare_match: comparison?.betterMatch || '',
@@ -56,8 +63,9 @@ export default async function handler(req, res) {
       save_self_intent: persistence?.saveSelfIntent || '',
       variation_intent: persistence?.variationIntent || '',
       open_feedback: persistence?.openFeedback || '',
-      nyla_interest_score: nyla?.interestScore ?? '',
+      nyla_interest_score: String(nyla?.interestScore ?? ''),
       nyla_waitlist_intent: nyla?.waitlistIntent || '',
+      submit_completed_at: submitCompletedAt || '',
       created_at: new Date().toISOString(),
     });
 
