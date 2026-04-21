@@ -35,53 +35,36 @@
   --ease:cubic-bezier(.4,0,.2,1);
 }
 html,body{min-height:100%;background:#f4f4f6;font-family:'Inter',sans-serif;color:var(--text1);-webkit-font-smoothing:antialiased}
-/* Layout */
 .app{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 16px 80px}
 .topbar{width:100%;max-width:760px;display:flex;align-items:center;justify-content:space-between;padding:20px 0 0}
 .logo{font-size:15px;font-weight:600;letter-spacing:-.03em;color:var(--text1)}
 .proto-badge{font-size:11px;font-weight:500;color:var(--text4);background:var(--bg3);border:1px solid var(--border);border-radius:var(--rpill);padding:4px 10px}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r16);padding:36px 40px;width:100%;max-width:760px;margin-top:24px;box-shadow:var(--shadow)}
-/* Progress */
 .progress-wrap{width:100%;max-width:760px;margin-top:28px;display:flex;align-items:center;gap:8px}
 .prog-step{flex:1;height:3px;border-radius:100px;background:var(--bg3);transition:background .3s var(--ease)}
 .prog-step.done{background:var(--accent)}
 .prog-step.active{background:var(--accent)}
-.prog-labels{width:100%;max-width:760px;display:flex;justify-content:space-between;margin-top:6px}
-.prog-label{font-size:10px;font-weight:500;color:var(--text4);letter-spacing:.04em;text-transform:uppercase}
-.prog-label.active{color:var(--accent)}
-/* Screen visibility */
 .screen{display:none}
 .screen.active{display:block}
-/* Typography */
 .overline{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text4);margin-bottom:10px}
 .display{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1.2;color:var(--text1);margin-bottom:10px}
 .h2{font-size:20px;font-weight:600;letter-spacing:-.025em;color:var(--text1);margin-bottom:6px}
-.h3{font-size:15px;font-weight:600;letter-spacing:-.015em;color:var(--text1);margin-bottom:4px}
 .body{font-size:14px;font-weight:400;color:var(--text2);line-height:1.65}
-.caption{font-size:12px;color:var(--text3);line-height:1.5}
 .sec-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
-/* Divider */
 .div{height:1px;background:var(--border);margin:28px 0}
-/* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-family:'Inter',sans-serif;font-weight:500;cursor:pointer;border:none;border-radius:var(--r8);transition:all .18s var(--ease);outline:none;text-decoration:none}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .btn:active{transform:scale(.98)}
 .btn-primary{background:var(--accent);color:#fff;font-size:14px;padding:11px 22px}
 .btn-primary:hover{background:var(--accent-hover)}
-.btn-secondary{background:var(--bg2);color:var(--text2);font-size:14px;padding:11px 22px;border:1.5px solid var(--border2)}
-.btn-secondary:hover{background:var(--bg3);border-color:var(--border3);color:var(--text1)}
-.btn-ghost{background:transparent;color:var(--text3);font-size:13px;padding:8px 14px;border:1.5px solid var(--border)}
-.btn-ghost:hover{background:var(--bg2);color:var(--text2);border-color:var(--border2)}
 .btn-back{background:none;border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;display:flex;align-items:center;gap:5px;padding:0;transition:color .15s}
 .btn-back:hover{color:var(--text1)}
 .btn-back:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
-/* Inputs */
 .field-label{font-size:13px;font-weight:500;color:var(--text2);display:block;margin-bottom:6px}
 .field-label .opt{font-weight:400;color:var(--text4)}
 input[type=text],input[type=email],textarea{font-family:'Inter',sans-serif;font-size:14px;font-weight:400;width:100%;padding:11px 14px;background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r8);color:var(--text1);outline:none;transition:border-color .18s;resize:none}
 input[type=text]::placeholder,input[type=email]::placeholder,textarea::placeholder{color:var(--text4)}
 input[type=text]:focus,input[type=email]:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-/* Starter mode cards */
 .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
 .mode-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:16px 18px;cursor:pointer;transition:all .18s var(--ease);position:relative}
 .mode-card:hover{background:var(--surface);border-color:var(--border2);box-shadow:var(--shadow)}
@@ -93,26 +76,19 @@ input[type=text]:focus,input[type=email]:focus,textarea:focus{border-color:var(-
 .mode-card.sel .mode-check{background:var(--accent);border-color:var(--accent)}
 .mode-check svg{display:none}
 .mode-card.sel .mode-check svg{display:block}
-/* Sliders */
 .slider-row{display:grid;grid-template-columns:72px 1fr 72px;align-items:center;gap:12px;margin-bottom:14px}
 .sl-lbl{font-size:12px;font-weight:500;color:var(--text3)}
 .sl-lbl.r{text-align:right}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:100px;background:linear-gradient(to right, var(--accent) var(--val,50%), var(--bg3) var(--val,50%));outline:none;cursor:pointer;border:none}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.15);cursor:pointer;transition:box-shadow .15s}
 input[type=range]::-webkit-slider-thumb:hover{box-shadow:0 0 0 4px rgba(37,99,235,.15)}
-input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(37,99,235,.25)}
-input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);box-shadow:0 1px 4px rgba(0,0,0,.15);cursor:pointer}
-/* Segmented / vibe chips */
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:7px 16px;border-radius:var(--rpill);border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .18s var(--ease)}
 .chip:hover{border-color:var(--border3);color:var(--text1)}
-.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .chip.on{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-/* Draft cards */
 .draft-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:24px}
 .draft-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:20px 22px;cursor:pointer;transition:all .18s var(--ease);position:relative}
 .draft-card:hover{background:var(--surface);border-color:var(--border2);box-shadow:var(--shadow)}
-.draft-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .draft-card.sel{background:var(--accent-light);border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
 .draft-img{width:100%;height:100px;background:var(--placeholder-bg);border:1px solid var(--placeholder-border);border-radius:var(--r8);margin-bottom:12px;display:flex;align-items:center;justify-content:center}
 .draft-img svg{color:var(--accent);opacity:.5}
@@ -122,25 +98,20 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .draft-radio{position:absolute;top:18px;right:18px;width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .draft-card.sel .draft-radio{border-color:var(--accent);background:var(--accent)}
 .draft-card.sel .draft-radio::after{content:'';display:block;width:8px;height:8px;border-radius:50%;background:#fff}
-/* Rating scale */
 .rating-row{margin-bottom:20px}
 .rating-q{font-size:13px;font-weight:500;color:var(--text1);margin-bottom:10px}
 .rating-scale{display:flex;gap:6px}
 .r-btn{width:40px;height:40px;border-radius:var(--r8);border:1.5px solid var(--border2);background:var(--surface);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text3);cursor:pointer;transition:all .18s var(--ease);flex-shrink:0}
 .r-btn:hover{border-color:var(--border3);color:var(--text1);background:var(--bg2)}
-.r-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .r-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .rating-labels{display:flex;justify-content:space-between;margin-top:5px;padding:0 2px}
 .r-lbl{font-size:10px;color:var(--text4)}
-/* Forced choice */
 .fc-row{margin-bottom:20px}
 .fc-q{font-size:14px;font-weight:500;color:var(--text1);margin-bottom:10px;line-height:1.45}
 .fc-opts{display:flex;gap:8px;flex-wrap:wrap}
 .fc-btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;padding:9px 18px;border-radius:var(--r8);border:1.5px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .18s var(--ease)}
 .fc-btn:hover{border-color:var(--border3);color:var(--text1);background:var(--bg2)}
-.fc-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .fc-btn.chosen{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-/* Compare layout */
 .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
 .compare-col{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:22px}
 .compare-col.b{background:var(--accent-light);border-color:var(--accent-border)}
@@ -149,37 +120,28 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .compare-badge.b{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-border)}
 .compare-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
 .compare-text{font-size:13px;font-weight:400;color:var(--text1);line-height:1.65}
-/* Action cards */
 .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:24px}
 .act-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--r12);padding:14px 18px;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--text2);text-align:left;transition:all .18s var(--ease);display:flex;align-items:center;gap:10px}
 .act-card:hover{background:var(--surface);border-color:var(--border2);color:var(--text1);box-shadow:var(--shadow)}
-.act-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .act-card.done{background:var(--green-light);border-color:var(--green-border);color:var(--green)}
 .act-icon{width:28px;height:28px;border-radius:var(--r8);background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .18s}
 .act-card.done .act-icon{background:var(--green-light);border-color:var(--green-border)}
-.act-card.done .act-icon svg{color:var(--green)}
-/* Nyla */
 .nyla-box{background:var(--text1);border-radius:var(--r16);padding:36px 40px;margin-top:8px}
 .nyla-logo{font-size:22px;font-weight:600;letter-spacing:-.04em;color:#fff;margin-bottom:8px}
 .nyla-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.65;margin-bottom:24px;max-width:440px}
 .nyla-box input[type=email]{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff;margin-bottom:10px}
 .nyla-box input[type=email]::placeholder{color:rgba(255,255,255,.35)}
-.nyla-box input[type=email]:focus{border-color:rgba(255,255,255,.5);box-shadow:none}
 .nyla-confirm{font-size:13px;color:#6ee7b7;margin-top:10px;display:none;align-items:center;gap:6px}
-/* Open text */
 textarea.open-q{min-height:80px}
-/* Task summary pill */
 .task-pill{display:inline-flex;align-items:center;gap:8px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rpill);padding:7px 14px;font-size:13px;color:var(--text2);margin-bottom:20px;max-width:100%}
 .task-pill svg{flex-shrink:0;color:var(--text3)}
 .task-pill span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-/* Responsive */
 @media(max-width:560px){
   .card{padding:24px 20px}
   .compare-grid{grid-template-columns:1fr}
   .mode-grid{grid-template-columns:1fr}
   .act-grid{grid-template-columns:1fr}
 }
-/* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .card{animation:fadeUp .3s ease both}
 </style>
@@ -187,13 +149,11 @@ textarea.open-q{min-height:80px}
 <body>
 <div class="app">
 
-  <!-- Topbar -->
   <div class="topbar">
     <span class="logo">nomi</span>
     <span class="proto-badge">Research prototype</span>
   </div>
 
-  <!-- Progress bar -->
   <div class="progress-wrap" id="progress-wrap">
     <div class="prog-step" id="ps1"></div>
     <div class="prog-step" id="ps2"></div>
@@ -204,7 +164,6 @@ textarea.open-q{min-height:80px}
     <div class="prog-step" id="ps7"></div>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 1 ═══════════════════════════════ -->
   <div class="screen active card" id="s1">
     <div class="overline">RedNote · Nomi prototype</div>
     <div class="display">Create a RedNote post<br>through a version of you</div>
@@ -224,7 +183,6 @@ textarea.open-q{min-height:80px}
     </button>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 2 ═══════════════════════════════ -->
   <div class="screen card" id="s2">
     <button class="btn-back" onclick="goScreen('s1')" style="margin-bottom:20px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -285,7 +243,6 @@ textarea.open-q{min-height:80px}
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 3 ═══════════════════════════════ -->
   <div class="screen card" id="s3">
     <button class="btn-back" onclick="goScreen('s2')" style="margin-bottom:20px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -295,7 +252,6 @@ textarea.open-q{min-height:80px}
     <div class="h2" style="margin-bottom:6px">Shape one version of you</div>
     <p class="body" style="margin-bottom:28px;max-width:480px">Takes about 30 seconds. Choose a starting mode, tune a few dials, and tell it one thing about how you want to feel on RedNote.</p>
 
-    <!-- Section 1 -->
     <div style="margin-bottom:28px">
       <div class="sec-label">Starting mode</div>
       <div class="mode-grid" id="mode-grid">
@@ -327,7 +283,6 @@ textarea.open-q{min-height:80px}
       </div>
     </div>
 
-    <!-- Section 2 -->
     <div style="margin-bottom:28px">
       <div class="sec-label">Adjust identity controls</div>
       <div class="slider-row">
@@ -347,13 +302,11 @@ textarea.open-q{min-height:80px}
       </div>
     </div>
 
-    <!-- Section 3 -->
     <div style="margin-bottom:28px">
       <label class="field-label" for="self-feel">What should this version of you feel like on RedNote? <span class="opt">(optional)</span></label>
       <textarea id="self-feel" rows="2" placeholder="e.g. Honest but not oversharing. Like a thoughtful friend, not a lifestyle brand."></textarea>
     </div>
 
-    <!-- Section 4 -->
     <div style="margin-bottom:32px">
       <div class="sec-label">Visual vibe <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--text4)">(optional)</span></div>
       <div class="chips">
@@ -371,7 +324,6 @@ textarea.open-q{min-height:80px}
     </button>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 4 ═══════════════════════════════ -->
   <div class="screen card" id="s4">
     <button class="btn-back" onclick="goScreen('s3')" style="margin-bottom:20px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -422,7 +374,6 @@ textarea.open-q{min-height:80px}
     </button>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 5 ═══════════════════════════════ -->
   <div class="screen card" id="s5">
     <button class="btn-back" onclick="goScreen('s4')" style="margin-bottom:20px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -496,7 +447,6 @@ textarea.open-q{min-height:80px}
     </button>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 6 ═══════════════════════════════ -->
   <div class="screen card" id="s6">
     <button class="btn-back" onclick="goScreen('s5')" style="margin-bottom:20px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -507,36 +457,11 @@ textarea.open-q{min-height:80px}
     <p class="body" style="margin-bottom:24px">Tap anything that feels useful or relevant to you.</p>
 
     <div class="act-grid">
-      <button class="act-card" onclick="togAct(this)">
-        <div class="act-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-        </div>
-        Save this self
-      </button>
-      <button class="act-card" onclick="togAct(this)">
-        <div class="act-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-        </div>
-        Reuse this self later
-      </button>
-      <button class="act-card" onclick="togAct(this)">
-        <div class="act-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        </div>
-        Make another version
-      </button>
-      <button class="act-card" onclick="togAct(this)">
-        <div class="act-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        Make more polished
-      </button>
-      <button class="act-card" onclick="togAct(this)">
-        <div class="act-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        </div>
-        Make more playful
-      </button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/></svg></div>Save this self</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>Reuse this self later</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>Make another version</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>Make more polished</button>
+      <button class="act-card" onclick="togAct(this)"><div class="act-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>Make more playful</button>
     </div>
 
     <div class="div"></div>
@@ -567,14 +492,13 @@ textarea.open-q{min-height:80px}
     <div class="div"></div>
     <button class="btn btn-primary" onclick="continueToScreen7()">
       Continue
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
-  <!-- ═══════════════════════════════ SCREEN 7 ═══════════════════════════════ -->
   <div class="screen card" id="s7">
     <button class="btn-back" onclick="goScreen('s6')" style="margin-bottom:20px">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
       Back
     </button>
     <div class="overline">What comes next</div>
@@ -586,13 +510,9 @@ textarea.open-q{min-height:80px}
       <label class="field-label" style="color:rgba(255,255,255,.5);font-size:12px;margin-bottom:8px">Email address</label>
       <input type="email" id="nyla-email" placeholder="your@email.com">
       <button class="btn btn-primary" style="width:100%;justify-content:center;border-radius:var(--r8);margin-top:4px" onclick="joinWaitlist()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3z"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
         Join the waitlist
       </button>
-      <div class="nyla-confirm" id="nyla-confirm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        You're on the list.
-      </div>
+      <div class="nyla-confirm" id="nyla-confirm">You're on the list.</div>
     </div>
 
     <div class="div"></div>
@@ -620,7 +540,7 @@ textarea.open-q{min-height:80px}
     </div>
   </div>
 
-</div><!-- /app -->
+</div>
 
 <script>
 var sessionId = null;
@@ -702,6 +622,15 @@ function showInlineMessage(container, message, isError) {
   el.textContent = message;
 }
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function startFlow() {
   taskText = document.getElementById('task-input').value.trim() || 'My morning ritual that actually changed how I work';
   notesText = document.getElementById('notes-input').value.trim();
@@ -714,6 +643,7 @@ async function generateA() {
   var btn = event && event.currentTarget ? event.currentTarget : document.querySelector('#s2-pregeneate .btn-primary');
   setButtonLoading(btn, true, 'Generating...');
   showInlineMessage(document.getElementById('s2-pregeneate'), 'Calling OpenAI for Version A...', false);
+
   try {
     var res = await fetch('/api/generate-a', {
       method: 'POST',
@@ -721,23 +651,25 @@ async function generateA() {
       body: JSON.stringify({
         sessionId: getOrCreateSessionId(),
         task: taskText,
-        notes: notesText,
+        notes: notesText
       })
     });
+
     var data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to generate Version A');
+
     draftsAData = data.drafts || defaultDraftsA(taskText);
     draftGenerationIdA = data.generationId || null;
     buildDrafts('drafts-a', draftsAData, 'a');
     document.getElementById('s2-pregeneate').style.display = 'none';
     document.getElementById('s2-results').style.display = 'block';
   } catch (err) {
-    console.error(err);
+    console.error('VERSION A ERROR', err);
     draftsAData = defaultDraftsA(taskText);
     buildDrafts('drafts-a', draftsAData, 'a');
     document.getElementById('s2-pregeneate').style.display = 'none';
     document.getElementById('s2-results').style.display = 'block';
-    showInlineMessage(document.getElementById('s2-results'), 'OpenAI call failed, so fallback demo drafts are shown. Check your environment variables after deployment.', true);
+    showInlineMessage(document.getElementById('s2-results'), 'VERSION A ERROR: ' + (err.message || 'unknown error') + '. Fallback drafts are shown.', true);
   } finally {
     setButtonLoading(btn, false);
   }
@@ -748,6 +680,7 @@ async function generateB() {
   document.getElementById('s4-mode-label').textContent = modeKey;
   var btn = event && event.currentTarget ? event.currentTarget : document.querySelector('#s3 .btn-primary');
   setButtonLoading(btn, true, 'Generating...');
+
   try {
     var res = await fetch('/api/generate-b', {
       method: 'POST',
@@ -762,34 +695,27 @@ async function generateB() {
           polish: Number(document.getElementById('sl-polish').value),
           energy: Number(document.getElementById('sl-energy').value),
           selfFeel: document.getElementById('self-feel').value.trim(),
-          vibes: getSelectedVibes(),
+          vibes: getSelectedVibes()
         }
       })
     });
+
     var data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to generate Version B');
+
     draftsBData = data.drafts || defaultDraftsB(taskText, modeKey);
     draftGenerationIdB = data.generationId || null;
     buildDrafts('drafts-b', draftsBData, 'b');
     goScreen('s4');
   } catch (err) {
-    console.error(err);
+    console.error('VERSION B ERROR', err);
     draftsBData = defaultDraftsB(taskText, modeKey);
     buildDrafts('drafts-b', draftsBData, 'b');
     goScreen('s4');
-    showInlineMessage(document.getElementById('s4'), 'OpenAI call failed, so fallback demo drafts are shown. Check your environment variables after deployment.', true);
+    showInlineMessage(document.getElementById('s4'), 'VERSION B ERROR: ' + (err.message || 'unknown error') + '. Fallback drafts are shown.', true);
   } finally {
     setButtonLoading(btn, false);
   }
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
 }
 
 function buildDrafts(containerId, data, version) {
@@ -806,19 +732,11 @@ function buildDrafts(containerId, data, version) {
   document.getElementById(containerId).innerHTML = html;
 }
 
-function escapeHtml(str) {
-  return String(str)
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
-}
-
 function selDraft(el, version, idx) {
   var container = el.closest('.draft-grid');
   container.querySelectorAll('.draft-card').forEach(function(c){ c.classList.remove('sel'); });
   el.classList.add('sel');
+
   if (version === 'a') {
     chosenDraftA = draftsAData[idx];
     responses.selectedDraftAIndex = idx;
@@ -826,12 +744,16 @@ function selDraft(el, version, idx) {
     chosenDraftB = draftsBData[idx];
     responses.selectedDraftBIndex = idx;
   }
+
   if (chosenDraftA) document.getElementById('cmp-a-text').textContent = chosenDraftA.title + ' — ' + chosenDraftA.body;
   if (chosenDraftB) document.getElementById('cmp-b-text').textContent = chosenDraftB.title + ' — ' + chosenDraftB.body;
 }
 
 function kbDraft(e, el, version, idx) {
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selDraft(el, version, idx); }
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    selDraft(el, version, idx);
+  }
 }
 
 function selMode(el, name) {
@@ -841,11 +763,19 @@ function selMode(el, name) {
 }
 
 function kbCard(e, el, fn, arg) {
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window[fn](el, arg); }
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    window[fn](el, arg);
+  }
 }
 
 function togChip(el) { el.classList.toggle('on'); }
-function kbChip(e, el) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togChip(el); } }
+function kbChip(e, el) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    togChip(el);
+  }
+}
 
 function rate(el, group) {
   var parent = el.closest('.rating-scale');
@@ -879,8 +809,10 @@ async function joinWaitlist() {
     alert('Please enter an email address first.');
     return;
   }
+
   var btn = event && event.currentTarget ? event.currentTarget : document.querySelector('#s7 .btn-primary');
   setButtonLoading(btn, true, 'Joining...');
+
   try {
     var res = await fetch('/api/join-waitlist', {
       method: 'POST',
@@ -888,15 +820,17 @@ async function joinWaitlist() {
       body: JSON.stringify({
         sessionId: getOrCreateSessionId(),
         email: email,
-        source: 'nyla_waitlist',
+        source: 'nyla_waitlist'
       })
     });
+
     var data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to save email');
+
     document.getElementById('nyla-confirm').style.display = 'flex';
   } catch (err) {
-    console.error(err);
-    alert(err.message || 'Could not join the waitlist right now.');
+    console.error('WAITLIST ERROR', err);
+    alert('WAITLIST ERROR: ' + (err.message || 'unknown error'));
   } finally {
     setButtonLoading(btn, false);
   }
@@ -917,6 +851,7 @@ async function saveStudyResponse() {
   if (feedbackSaved || savingFeedback) return true;
   savingFeedback = true;
   responses.openFeedback = document.getElementById('open-q').value.trim();
+
   try {
     var res = await fetch('/api/save-response', {
       method: 'POST',
@@ -931,7 +866,7 @@ async function saveStudyResponse() {
           selectedDraft: chosenDraftA,
           editScore: responses.ratings.ra1 || null,
           matchScore: responses.ratings.ra2 || null,
-          drafts: draftsAData,
+          drafts: draftsAData
         },
         versionB: {
           generationId: draftGenerationIdB,
@@ -945,34 +880,36 @@ async function saveStudyResponse() {
           selectedDraft: chosenDraftB,
           editScore: responses.ratings.rb1 || null,
           matchScore: responses.ratings.rb2 || null,
-          drafts: draftsBData,
+          drafts: draftsBData
         },
         comparison: {
           betterMatch: responses.forcedChoice.fc1 || null,
           moreLikelyToPost: responses.forcedChoice.fc2 || null,
           lessEditing: responses.forcedChoice.fc3 || null,
           easierResult: responses.forcedChoice.fc4 || null,
-          nextTimePath: responses.forcedChoice.fc5 || null,
+          nextTimePath: responses.forcedChoice.fc5 || null
         },
         persistence: {
           actionSelections: responses.actions,
           saveSelfIntent: responses.forcedChoice.p1 || null,
           variationIntent: responses.forcedChoice.p2 || null,
-          openFeedback: responses.openFeedback,
+          openFeedback: responses.openFeedback
         },
         nyla: {
           interestScore: responses.nylaInterestScore || null,
-          waitlistIntent: responses.waitlistInterest || null,
+          waitlistIntent: responses.waitlistInterest || null
         }
       })
     });
+
     var data = await res.json();
     if (!res.ok) throw new Error(data.error || 'Failed to save response');
+
     feedbackSaved = true;
     return true;
   } catch (err) {
-    console.error(err);
-    alert(err.message || 'Could not save your responses.');
+    console.error('SAVE RESPONSE ERROR', err);
+    alert('SAVE RESPONSE ERROR: ' + (err.message || 'unknown error'));
     return false;
   } finally {
     savingFeedback = false;
