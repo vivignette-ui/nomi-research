@@ -578,13 +578,6 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 
   <div class="screen card" id="s7">
-    <div id="prolific-code-box" style="display:none;margin-bottom:18px;padding:14px 16px;border-radius:12px;background:rgba(92,170,136,0.10);border:1px solid rgba(92,170,136,0.28);">
-      <div style="font-size:14px;font-weight:600;color:#dff7ea;margin-bottom:6px;">Thank you. Your responses have been recorded.</div>
-      <div style="font-size:13px;font-weight:400;color:#bfe8d3;">
-        Your Prolific completion code is: <span style="font-weight:700;letter-spacing:0.04em;color:#ffffff;">C17V9FNZ</span>
-      </div>
-    </div>
-
     <button class="btn-back" onclick="go('s6')" style="margin-bottom:22px">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="15 18 9 12 15 6"/></svg>
       Back
@@ -1066,7 +1059,6 @@ async function submitRatings() {
 
     submitCompleted = true;
     document.getElementById('submit-confirm').style.display = 'flex';
-    document.getElementById('prolific-code-box').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
     console.error(err);
